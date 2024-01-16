@@ -3,6 +3,7 @@ package com.example.labxspringboot.controller;
 import com.example.labxspringboot.dto.MaterielEchanDto;
 import com.example.labxspringboot.service.IMaterialEchanService;
 import com.example.labxspringboot.service.impl.MaterialEchanServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/material")
+@AllArgsConstructor
 public class MaterialEchanController {
 
     @Autowired

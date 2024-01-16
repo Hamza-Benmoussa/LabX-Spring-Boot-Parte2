@@ -18,6 +18,5 @@ public class ReactifDto implements Serializable {
     int quantiteStock;
     String dateExpiration;
     String fournisseurNom;
-    Long testAnalyseId;
     boolean deleted;
 }

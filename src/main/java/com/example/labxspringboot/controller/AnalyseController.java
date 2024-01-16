@@ -26,33 +26,23 @@ public class AnalyseController {
 
     @GetMapping
     public ResponseEntity<List<AnalyseDto>> getAllAnalyses() {
-        List<AnalyseDto> analyses = analyseService.getAnalyses();
-        return new ResponseEntity<>(analyses, HttpStatus.OK);
+        return ResponseEntity.ok(analyseService.getAnalyses());
     }
 
     @GetMapping("/{id}")
-public ResponseEntity<AnalyseDto> getAnalyseById(@PathVariable("id") Long analyseId) {
+    public ResponseEntity<AnalyseDto> getAnalyseById(@PathVariable("id") Long analyseId) {
     AnalyseDto analyseDto = analyseService.getAnalyseById(analyseId);
-    if (analyseDto != null) {
-        return new ResponseEntity<>(analyseDto, HttpStatus.OK);
-    } else {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-}
+    return ResponseEntity.ok(analyseDto);
+ }
 
-@PutMapping("/{id}")
-public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable("id") Long id, @RequestBody AnalyseDto analyseDto) {
-    AnalyseDto updatedAnalyseDto = analyseService.updateAnalyse(analyseDto, id);
-    if (updatedAnalyseDto != null) {
-        return new ResponseEntity<>(updatedAnalyseDto, HttpStatus.OK);
-    } else {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-}
+    @PutMapping("/{id}")
+    public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable("id") Long id, @RequestBody AnalyseDto analyseDto) {
+    return ResponseEntity.ok(analyseService.updateAnalyse(analyseDto,id));
+ }
 
-@DeleteMapping("/{id}")
-public ResponseEntity<String> deleteAnalyseById(@PathVariable("id") Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAnalyseById(@PathVariable("id") Long id) {
     analyseService.deleteAnalyse(id);
     return ResponseEntity.ok("Analyse with : "+id+"has benn deleted succes");
-}
+ }
 }

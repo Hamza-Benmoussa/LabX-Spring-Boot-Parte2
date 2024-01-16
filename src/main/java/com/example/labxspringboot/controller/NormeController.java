@@ -1,7 +1,6 @@
 package com.example.labxspringboot.controller;
 
-import com.example.labxspringboot.entity.Analyse;
-import com.example.labxspringboot.entity.Norme;
+import com.example.labxspringboot.dto.NormeDto;
 import com.example.labxspringboot.service.impl.NormeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,29 +16,31 @@ public class NormeController {
     @Autowired
     private NormeServiceImpl normeService;
 
-
-
     @PostMapping
-    public ResponseEntity<Norme> saveNorme(@RequestBody Norme norme){
-        return new ResponseEntity<Norme>(normeService.saveNorme(norme) , HttpStatus.CREATED);
+    public ResponseEntity<NormeDto> saveNorme(@RequestBody NormeDto normeDto) {
+        NormeDto savedNormeDto = normeService.saveNorme(normeDto);
+        return new ResponseEntity<>(savedNormeDto, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Norme> getAllNorme(){
-        return normeService.getNormes();
+    public ResponseEntity<List<NormeDto>> getAllNormes() {
+        return ResponseEntity.ok(normeService.getNormes());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Norme> getNormeById(@PathVariable ("id") Long normeId){
-        return new ResponseEntity<Norme>(normeService.getNormeById(normeId) ,HttpStatus.OK);
+    public ResponseEntity<NormeDto> getNormeById(@PathVariable("id") Long normeId) {
+        NormeDto normeDto = normeService.getNormeById(normeId);
+        return ResponseEntity.ok(normeDto);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Norme> updateNorme(@PathVariable ("id") Long id , @RequestBody Norme norme){
-        return new ResponseEntity<Norme>(normeService.updateNorme(norme,id) ,HttpStatus.OK);
+    public ResponseEntity<NormeDto> updateNorme(@PathVariable("id") Long id, @RequestBody NormeDto normeDto) {
+        return ResponseEntity.ok(normeService.updateNorme(normeDto, id));
     }
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteNorme(@PathVariable ("id") Long id){
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteNormeById(@PathVariable("id") Long id) {
         normeService.deleteNorme(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Norme with id : " + id + " was deleted");
     }
 }

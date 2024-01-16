@@ -47,14 +47,14 @@ public class MaterialEchanServiceImpl implements IMaterialEchanService {
 
     @Override
     public MaterielEchanDto updateMaterialEchan(MaterielEchanDto materielEchanDto, Long id) {
-        MaterielEchan existingMaterialEchan = materialRepository.findById(id).orElse(null);
-        if (existingMaterialEchan != null) {
-            modelMapper.map(materielEchanDto, existingMaterialEchan);
-            existingMaterialEchan.setId(id);
-            MaterielEchan savedMaterialEchan = materialRepository.save(existingMaterialEchan);
-            return modelMapper.map(savedMaterialEchan, MaterielEchanDto.class);
-        }
-        return null;
+        MaterielEchan existingMaterialEchan = materialRepository.findByIdAndDeletedFalse(id).orElse(null);
+        existingMaterialEchan.setDateExpirationEchan(materielEchanDto.getDateExpirationEchan());
+        existingMaterialEchan.setFournisseurNom(materielEchanDto.getFournisseurNom());
+        existingMaterialEchan.setNomechan(materielEchanDto.getNomechan());
+        existingMaterialEchan.setQuantiteStockEhcna(materielEchanDto.getQuantiteStockEhcna());
+        MaterielEchan updateMaterialEchan = materialRepository.save(existingMaterialEchan);
+        updateMaterialEchan.setId(id);
+        return modelMapper.map(updateMaterialEchan,MaterielEchanDto.class);
     }
 
     @Override

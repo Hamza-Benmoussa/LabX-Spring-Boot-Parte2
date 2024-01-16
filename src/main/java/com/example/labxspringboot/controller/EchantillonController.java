@@ -26,33 +26,23 @@ public class EchantillonController {
 
     @GetMapping
     public ResponseEntity<List<EchantillonDto>> getAllEchantillons() {
-        List<EchantillonDto> echantillons = echantillonService.getEchantillons();
-        return new ResponseEntity<>(echantillons ,HttpStatus.OK);
+        return ResponseEntity.ok(echantillonService.getEchantillons());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EchantillonDto> getEchantillonById(@PathVariable("id") Long echantillonId) {
         EchantillonDto echantillonDto = echantillonService.getEchantillonById(echantillonId);
-        if (echantillonDto != null) {
-            return new ResponseEntity<>(echantillonDto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return ResponseEntity.ok(echantillonDto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EchantillonDto> updateEchantillon(@PathVariable("id") Long id, @RequestBody EchantillonDto echantillonDto) {
-        EchantillonDto updatedEchantillonDto = echantillonService.updateEchantillon(echantillonDto, id);
-        if (updatedEchantillonDto != null) {
-            return new ResponseEntity<>(updatedEchantillonDto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+       return ResponseEntity.ok(echantillonService.updateEchantillon(echantillonDto ,id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEchantillonById(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteEchantillonById(@PathVariable("id") Long id) {
         echantillonService.deleteEchantillon(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Echantillon with id : " + id + "was deleted");
     }
 }

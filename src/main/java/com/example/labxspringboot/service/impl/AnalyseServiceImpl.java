@@ -37,8 +37,7 @@ public class AnalyseServiceImpl implements IAnalyseService {
 
     @Override
     public AnalyseDto getAnalyseById(Long id) {
-        Analyse analyse = iAnalyseRepository.findByIdAndDeletedFalse(id).orElse(null);
-        return modelMapper.map(analyse,AnalyseDto.class);
+        return iAnalyseRepository.findByIdAndDeletedFalse(id).map(analyse -> modelMapper.map(analyse,AnalyseDto.class)).orElse(null);
     }
 
     @Override
