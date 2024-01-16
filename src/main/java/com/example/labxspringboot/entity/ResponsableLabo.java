@@ -21,4 +21,7 @@ public class ResponsableLabo extends Utilisateur {
     @OneToMany(mappedBy = "responsableLaboAnalyse" , cascade = CascadeType.ALL)
     private List<Analyse> analyses;
 
+    @Column(name="is_deleted")
+    private Boolean deleted;
+
 }

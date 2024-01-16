@@ -31,6 +31,9 @@ public class Patient {
 
     private String numeroTelephone;
 
+    @Column(name="is_deleted")
+    private Boolean deleted;
+
     @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
     private List<Echantillon> historiqueAnalyses;
 

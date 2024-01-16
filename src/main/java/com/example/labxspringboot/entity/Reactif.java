@@ -27,6 +27,9 @@ public class Reactif {
 
     private String fournisseurNom;
 
+    @Column(name="is_deleted")
+    private Boolean deleted;
+
     @OneToOne(mappedBy = "reactif" , cascade = CascadeType.ALL)
     private TestAnalyse testAnalyse;
 
