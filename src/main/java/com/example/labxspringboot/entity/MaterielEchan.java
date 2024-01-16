@@ -27,6 +27,9 @@ public class MaterielEchan {
     @OneToOne(mappedBy = "materielEchan" , cascade = CascadeType.ALL)
     private Echantillon echantillon;
 
+    @Column(name="is_deleted")
+    private Boolean deleted;
+
     public MaterielEchan(String nomechan, int quantiteStockEhcna, String dateExpirationEchan, String fournisseurNom) {
         this.nomechan = nomechan;
         this.quantiteStockEhcna = quantiteStockEhcna;

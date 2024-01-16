@@ -21,5 +21,8 @@
         @OneToMany(mappedBy = "technicienEch" ,cascade = CascadeType.ALL)
         private List<Echantillon> echantillon;
 
+        @Column(name="is_deleted")
+        private Boolean deleted;
+
 
     }

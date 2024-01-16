@@ -1,13 +1,13 @@
 package com.example.labxspringboot.service;
 
-import com.example.labxspringboot.entity.Analyse;
+import com.example.labxspringboot.dto.AnalyseDto;
 
 import java.util.List;
 
 public interface IAnalyseService {
-    Analyse saveAnalyse(Analyse analyse);
-    List<Analyse> getAnalyses();
-    Analyse getAnalyseById(Long id);
-    Analyse updateAnalyse(Analyse analyse,Long id);
+    AnalyseDto saveAnalyse(AnalyseDto analyseDto);
+    List<AnalyseDto> getAnalyses();
+    AnalyseDto getAnalyseById(Long id);
+    AnalyseDto updateAnalyse(AnalyseDto analyseDto, Long id);
     void deleteAnalyse(Long id);
 }

@@ -34,6 +34,9 @@ public class Echantillon {
 
     private String datePrelevement;
 
+    @Column(name="is_deleted")
+    private Boolean deleted;
+
     public Echantillon(Patient patient, MaterielEchan materielEchan, List<Analyse> analyses, Technicien technicien, String datePrelevement) {
         this.patient = patient;
         this.materielEchan = materielEchan;

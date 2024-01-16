@@ -8,6 +8,6 @@ public interface IReactifService {
     Reactif saveReactif(Reactif reactif);
     List<Reactif> getReactifs();
     Reactif getReactifById(Long id);
-    Reactif updateReactif(Reactif reactif);
+    Reactif updateReactif(Reactif reactif , Long id);
     void deleteReactif(Long id);
 }

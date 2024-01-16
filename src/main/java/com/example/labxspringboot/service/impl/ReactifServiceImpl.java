@@ -30,7 +30,7 @@ public class ReactifServiceImpl implements IReactifService {
     }
 
     @Override
-    public Reactif updateReactif(Reactif reactif) {
+    public Reactif updateReactif(Reactif reactif ,Long id) {
         return reactifRepository.save(reactif);
     }
 
