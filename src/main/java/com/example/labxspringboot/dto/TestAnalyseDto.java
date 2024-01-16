@@ -2,6 +2,8 @@ package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.TestAnalyse;
 import com.example.labxspringboot.entity.enume.StatusResultat;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -9,7 +11,8 @@ import java.io.Serializable;
 /**
  * DTO for {@link TestAnalyse}
  */
-@Value
+@Data
+@NoArgsConstructor
 public class TestAnalyseDto implements Serializable {
     Long id;
     String description;
@@ -19,4 +22,5 @@ public class TestAnalyseDto implements Serializable {
     Long analyseId;
     Long reactifId;
     Long normeId;
+    boolean deleted;
 }

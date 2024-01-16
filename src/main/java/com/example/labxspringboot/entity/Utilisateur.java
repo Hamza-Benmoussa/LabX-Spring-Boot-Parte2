@@ -27,8 +27,8 @@ public class Utilisateur {
     @Enumerated(EnumType.STRING)
     private RoleUser role;
 
-    @Column(name="is_deleted")
-    private Boolean deleted;
+    @Column(name="is_deleted" ,nullable = false)
+    private boolean deleted;
 
 //    @OneToMany(mappedBy = "utilisateur")
 //    private List<RapportStatis> generateursRapports;

@@ -2,6 +2,8 @@ package com.example.labxspringboot.controller;
 
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.service.IAnalyseService;
+import com.example.labxspringboot.service.impl.AnalyseServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import java.util.List;
 public class AnalyseController {
 
     @Autowired
-    private IAnalyseService analyseService;
+    private AnalyseServiceImpl analyseService;
 
     @PostMapping
     public ResponseEntity<AnalyseDto> saveAnalyse(@RequestBody AnalyseDto analyseDto) {
@@ -49,8 +51,8 @@ public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable("id") Long id, @Re
 }
 
 @DeleteMapping("/{id}")
-public ResponseEntity<Void> deleteAnalyseById(@PathVariable("id") Long id) {
+public ResponseEntity<String> deleteAnalyseById(@PathVariable("id") Long id) {
     analyseService.deleteAnalyse(id);
-    return ResponseEntity.noContent().build();
+    return ResponseEntity.ok("Analyse with : "+id+"has benn deleted succes");
 }
 }

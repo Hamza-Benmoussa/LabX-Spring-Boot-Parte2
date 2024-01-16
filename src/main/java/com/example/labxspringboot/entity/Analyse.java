@@ -45,8 +45,8 @@ public class Analyse {
 
     private String commentaires;
 
-    @Column(name="is_deleted")
-    private Boolean deleted;
+    @Column(name="is_deleted" ,nullable = false)
+    private boolean deleted;
 
     public Analyse(Echantillon echantillon, ResponsableLabo responsableLaboAnalyse, List<TestAnalyse> testAnalyses, TypeAnalyse typeAnalyse, String dateDebutAnalyse, String dateFinAnalyse, StatusResultat status, StatusAnalyse statusAnalyse, String commentaires) {
         this.echantillon = echantillon;
