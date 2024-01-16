@@ -6,7 +6,7 @@ LabXpert est un système complet de gestion de laboratoire médical développé 
 ## Fonctionnalités
 
 1. **Enregistrement des Échantillons :**
-   - Les techniciens peuvent enregistrer de nouveaux échantillons en spécifiant les informations pertinentes telles que le patient, le type d'analyse et la date de prélèvement.
+   - Les techniciens peuvent enregistrers de nouveaux échantillons en spécifiant les informations pertinentes telles que le patient, le type d'analyse et la date de prélèvement.
 
 2. **Suivi des Analyses en Cours :**
    - Interface conviviale pour suivre en temps réel l'état d'avancement des analyses en cours, avec des détails spécifiques pour chaque échantillon.
