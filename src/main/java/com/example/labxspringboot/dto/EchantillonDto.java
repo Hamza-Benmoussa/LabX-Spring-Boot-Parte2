@@ -17,7 +17,7 @@ public class EchantillonDto implements Serializable {
     Long id;
     Long patientId;
     Long materielEchanId;
-    Long technicienEchId;
+    Long utilisateurId;
     String datePrelevement;
     boolean deleted;
 }

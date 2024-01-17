@@ -18,7 +18,7 @@ import java.util.List;
 public class AnalyseDto implements Serializable {
     Long id;
     Long echantillonId;
-    Long responsableLaboAnalyseId;
+    Long utilisateurId;
     List<Long> testAnalysisIds;
     TypeAnalyse typeAnalyse;
     String dateDebutAnalyse;

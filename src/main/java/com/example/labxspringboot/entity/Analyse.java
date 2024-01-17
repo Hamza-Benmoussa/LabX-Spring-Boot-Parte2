@@ -25,7 +25,7 @@ public class Analyse {
     private Echantillon echantillon;
 
     @ManyToOne
-    private ResponsableLabo responsableLaboAnalyse;
+    private Utilisateur utilisateurRespo;
 
     @OneToMany(mappedBy = "analyse" , cascade = CascadeType.ALL)
     private List<TestAnalyse> testAnalyses;
@@ -48,15 +48,4 @@ public class Analyse {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
-    public Analyse(Echantillon echantillon, ResponsableLabo responsableLaboAnalyse, List<TestAnalyse> testAnalyses, TypeAnalyse typeAnalyse, String dateDebutAnalyse, String dateFinAnalyse, StatusResultat status, StatusAnalyse statusAnalyse, String commentaires) {
-        this.echantillon = echantillon;
-        this.responsableLaboAnalyse = responsableLaboAnalyse;
-        this.testAnalyses = testAnalyses;
-        this.typeAnalyse = typeAnalyse;
-        this.dateDebutAnalyse = dateDebutAnalyse;
-        this.dateFinAnalyse = dateFinAnalyse;
-        this.status = status;
-        this.statusAnalyse = statusAnalyse;
-        this.commentaires = commentaires;
-    }
 }

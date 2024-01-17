@@ -20,7 +20,7 @@ public class TestAnalyse {
     private String description;
 
     @ManyToOne
-    private ResponsableLabo responsableLaboTest;
+    private Utilisateur utilisateurRespo;
 
     @Enumerated(EnumType.STRING)
     private StatusResultat statusResultat;

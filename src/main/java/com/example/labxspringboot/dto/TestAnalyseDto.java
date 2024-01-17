@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class TestAnalyseDto implements Serializable {
     Long id;
     String description;
-    Long responsableLaboTestId;
+    Long utilisateurId;
     StatusResultat statusResultat;
     float resultatNmbr;
     Long analyseId;
