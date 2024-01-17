@@ -30,7 +30,7 @@ public class Echantillon {
     private List<Analyse> analyses;
 
     @ManyToOne
-    private Technicien technicienEch;
+    private Utilisateur utilisateurTechnicien;
 
     private String datePrelevement;
 

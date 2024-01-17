@@ -2,6 +2,8 @@ package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.RoleUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
@@ -16,6 +18,7 @@ import java.io.Serializable;
 public class UtilisateurDto implements Serializable {
     Long id;
     String nomUtilisateur;
+    //@JsonIgnore
     String motDePasse;
     RoleUser role;
     boolean deleted;
