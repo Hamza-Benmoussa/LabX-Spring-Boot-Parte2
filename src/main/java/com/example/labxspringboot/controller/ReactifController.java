@@ -41,6 +41,6 @@ public class ReactifController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteNorme(@PathVariable("id") Long id) {
         reactifService.deleteReactif(id);
-        return ResponseEntity.ok("Norme with id : " + id + "was deleted");
+        return ResponseEntity.ok("Reactif with id : " + id + "was deleted");
     }
 }

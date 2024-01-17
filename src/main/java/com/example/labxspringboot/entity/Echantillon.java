@@ -37,12 +37,5 @@ public class Echantillon {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
-    public Echantillon(Patient patient, MaterielEchan materielEchan, List<Analyse> analyses, Technicien technicien, String datePrelevement) {
-        this.patient = patient;
-        this.materielEchan = materielEchan;
-        this.analyses = analyses;
-        this.technicienEch = technicien;
-        this.datePrelevement = datePrelevement;
-    }
 }
 

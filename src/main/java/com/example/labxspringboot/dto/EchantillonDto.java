@@ -1,6 +1,9 @@
 package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.Echantillon;
+import com.example.labxspringboot.entity.MaterielEchan;
+import com.example.labxspringboot.entity.Patient;
+import com.example.labxspringboot.entity.Technicien;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
@@ -15,9 +18,9 @@ import java.util.List;
 @NoArgsConstructor
 public class EchantillonDto implements Serializable {
     Long id;
-    Long patientId;
-    Long materielEchanId;
-    Long technicienEchId;
+    Patient patient;
+    MaterielEchan materielEchan;
+    Technicien technicienEch;
     String datePrelevement;
     boolean deleted;
 }

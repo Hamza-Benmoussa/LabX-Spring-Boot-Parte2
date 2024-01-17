@@ -1,14 +1,20 @@
 package com.example.labxspringboot.service;
 
+import com.example.labxspringboot.dto.MaterielEchanDto;
+import com.example.labxspringboot.dto.PatientDto;
 import com.example.labxspringboot.entity.Patient;
 
 import java.util.List;
 
 public interface IPatientService {
 
-    Patient savePatient(Patient patient);
-    List<Patient> getPatients();
-    Patient getPatientById(Long id);
-    Patient updatePatient(Patient patient);
+    PatientDto savePatient(PatientDto patientDto);
+
+    List<PatientDto> getPatients();
+
+    PatientDto getPatientById(Long id);
+
+    PatientDto updatePatient(PatientDto patientDto, Long id);
+
     void deletePatient(Long id);
 }
