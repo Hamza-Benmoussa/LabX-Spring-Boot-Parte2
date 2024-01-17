@@ -36,6 +36,6 @@ public class TestAnalyse {
     @OneToOne
     private Norme norme;
 
-    @Column(name="is_deleted")
-    private Boolean deleted;
+    @Column(name="is_deleted" ,nullable = false)
+    private boolean deleted;
 }

@@ -10,4 +10,5 @@ public interface IAnalyseService {
     AnalyseDto getAnalyseById(Long id);
     AnalyseDto updateAnalyse(AnalyseDto analyseDto, Long id);
     void deleteAnalyse(Long id);
+
 }

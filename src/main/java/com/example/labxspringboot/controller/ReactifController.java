@@ -1,8 +1,6 @@
 package com.example.labxspringboot.controller;
 
-import com.example.labxspringboot.entity.Norme;
-import com.example.labxspringboot.entity.Reactif;
-import com.example.labxspringboot.service.impl.NormeServiceImpl;
+import com.example.labxspringboot.dto.ReactifDto;
 import com.example.labxspringboot.service.impl.ReactifServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,28 +16,31 @@ public class ReactifController {
     @Autowired
     private ReactifServiceImpl reactifService;
 
-
     @PostMapping
-    public ResponseEntity<Reactif> saveReactif(@RequestBody Reactif reactif){
-        return new ResponseEntity<Reactif>(reactifService.saveReactif(reactif) , HttpStatus.CREATED);
+    public ResponseEntity<ReactifDto> saveReactif(@RequestBody ReactifDto reactifDto) {
+        ReactifDto savedReactifDto = reactifService.saveReactif(reactifDto);
+        return new ResponseEntity<>(savedReactifDto, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Reactif> getAllReactif(){
-        return reactifService.getReactifs();
+    public ResponseEntity<List<ReactifDto>> getAllReactifs() {
+        return ResponseEntity.ok(reactifService.getReactifs());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reactif> getReactifById(@PathVariable ("id") Long reactifId){
-        return new ResponseEntity<Reactif>(reactifService.getReactifById(reactifId) ,HttpStatus.OK);
+    public ResponseEntity<ReactifDto> getReactifById(@PathVariable("id") Long reactifId) {
+        ReactifDto reactifDto = reactifService.getReactifById(reactifId);
+        return ResponseEntity.ok(reactifDto);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Reactif> updateReactif(@PathVariable ("id") Long id , @RequestBody Reactif reactif){
-        return new ResponseEntity<Reactif>(reactifService.updateReactif(reactif,id) ,HttpStatus.OK);
+    public ResponseEntity<ReactifDto> updateReactif(@PathVariable("id") Long id, @RequestBody ReactifDto reactifDto) {
+        return ResponseEntity.ok(reactifService.updateReactif(reactifDto,id));
     }
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteReactif(@PathVariable ("id") Long id){
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteNorme(@PathVariable("id") Long id) {
         reactifService.deleteReactif(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Norme with id : " + id + "was deleted");
     }
 }

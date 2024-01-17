@@ -1,44 +1,49 @@
 package com.example.labxspringboot.controller;
 
-import com.example.labxspringboot.entity.MaterielEchan;
-import com.example.labxspringboot.entity.Norme;
+import com.example.labxspringboot.dto.MaterielEchanDto;
+import com.example.labxspringboot.service.IMaterialEchanService;
 import com.example.labxspringboot.service.impl.MaterialEchanServiceImpl;
-import com.example.labxspringboot.service.impl.NormeServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/material")
+@AllArgsConstructor
 public class MaterialEchanController {
 
     @Autowired
     private MaterialEchanServiceImpl materialEchanService;
 
-
     @PostMapping
-    public ResponseEntity<MaterielEchan> saveMaterial(@RequestBody MaterielEchan materielEchan){
-        return new ResponseEntity<MaterielEchan>(materialEchanService.saveMaterialEchan(materielEchan) , HttpStatus.CREATED);
+    public ResponseEntity<MaterielEchanDto> saveMaterial(@RequestBody MaterielEchanDto materielEchanDto) {
+        MaterielEchanDto materielEchanDto1 = materialEchanService.saveMaterialEchan(materielEchanDto);
+        return new ResponseEntity<>(materielEchanDto1,HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<MaterielEchan> getAllMaterial(){
-        return materialEchanService.getMaterialEchans();
+    public ResponseEntity<List<MaterielEchanDto>> getAllMaterial() {
+        return ResponseEntity.ok(materialEchanService.getMaterialEchans());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MaterielEchan> getMaterialById(@PathVariable("id") Long materialId){
-        return new ResponseEntity<MaterielEchan>(materialEchanService.getMaterialEchanById(materialId) ,HttpStatus.OK);
+    public ResponseEntity<MaterielEchanDto> getMaterialById(@PathVariable("id") Long materialId) {
+        MaterielEchanDto materielEchanDto = materialEchanService.getMaterialEchanById(materialId);
+        return ResponseEntity.ok(materielEchanDto);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<MaterielEchan> updateMaterial(@PathVariable ("id") Long id, @RequestBody MaterielEchan materielEchan){
-        return new ResponseEntity<MaterielEchan>(materialEchanService.updateMaterialEchan(materielEchan ,id) ,HttpStatus.OK);
+    public ResponseEntity<MaterielEchanDto> updateMaterial(@PathVariable("id") Long id, @RequestBody MaterielEchanDto materielEchanDto) {
+        return ResponseEntity.ok(materialEchanService.updateMaterialEchan(materielEchanDto,id));
     }
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteNorme(@PathVariable ("id") Long id){
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMaterial(@PathVariable("id") Long id) {
         materialEchanService.deleteMaterialEchan(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Material with id : " + id + "was deleted");
     }
 }

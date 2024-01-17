@@ -25,8 +25,8 @@ public class Norme {
 
     private String unite;
 
-    @Column(name="is_deleted")
-    private Boolean deleted;
+    @Column(name="is_deleted" ,nullable = false)
+    private boolean deleted;
 
     @OneToOne(mappedBy = "norme" ,cascade = CascadeType.ALL)
     private TestAnalyse testAnalyse;

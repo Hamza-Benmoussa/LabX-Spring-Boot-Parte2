@@ -1,5 +1,7 @@
 package com.example.labxspringboot.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -8,7 +10,8 @@ import java.util.List;
 /**
  * DTO for {@link com.example.labxspringboot.entity.Patient}
  */
-@Value
+@Data
+@NoArgsConstructor
 public class PatientDto implements Serializable {
     Long id;
     String nom;
@@ -18,4 +21,5 @@ public class PatientDto implements Serializable {
     String adresse;
     String numeroTelephone;
     List<Long> historiqueAnalysisIds;
+    boolean deleted;
 }

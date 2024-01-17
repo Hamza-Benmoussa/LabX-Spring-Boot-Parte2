@@ -1,5 +1,7 @@
 package com.example.labxspringboot.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -7,7 +9,8 @@ import java.io.Serializable;
 /**
  * DTO for {@link com.example.labxspringboot.entity.Reactif}
  */
-@Value
+@Data
+@NoArgsConstructor
 public class ReactifDto implements Serializable {
     Long id;
     String nom;
@@ -15,5 +18,5 @@ public class ReactifDto implements Serializable {
     int quantiteStock;
     String dateExpiration;
     String fournisseurNom;
-    Long testAnalyseId;
+    boolean deleted;
 }
