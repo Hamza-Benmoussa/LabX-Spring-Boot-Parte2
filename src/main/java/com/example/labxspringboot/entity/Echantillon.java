@@ -1,9 +1,11 @@
 package com.example.labxspringboot.entity;
 
 import com.example.labxspringboot.entity.enume.StatusAnalyse;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,8 +27,9 @@ public class Echantillon {
 
     @OneToOne
     private MaterielEchan materielEchan;
-
-    @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JsonIgnore  // Add this annotation to break the loop
     private List<Analyse> analyses;
 
     @ManyToOne

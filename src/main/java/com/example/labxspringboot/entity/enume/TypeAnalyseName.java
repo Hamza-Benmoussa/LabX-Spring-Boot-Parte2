@@ -1,6 +1,6 @@
 package com.example.labxspringboot.entity.enume;
 
-public enum TypeAnalyse {
+public enum TypeAnalyseName {
 
     HEMATOLOGIE,
     CHIMIE_CLINIQUE,

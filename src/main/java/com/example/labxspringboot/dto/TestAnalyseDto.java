@@ -1,6 +1,6 @@
 package com.example.labxspringboot.dto;
 
-import com.example.labxspringboot.entity.TestAnalyse;
+import com.example.labxspringboot.entity.*;
 import com.example.labxspringboot.entity.enume.StatusResultat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +16,11 @@ import java.io.Serializable;
 public class TestAnalyseDto implements Serializable {
     Long id;
     String description;
-    Long utilisateurId;
+    Utilisateur utilisateurRespo;
     StatusResultat statusResultat;
     float resultatNmbr;
-    Long analyseId;
-    Long reactifId;
-    Long normeId;
+    Analyse analyse;
+    Reactif reactif;
+    Norme normeId;
     boolean deleted;
 }

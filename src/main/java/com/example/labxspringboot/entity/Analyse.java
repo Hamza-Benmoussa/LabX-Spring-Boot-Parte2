@@ -1,11 +1,12 @@
 package com.example.labxspringboot.entity;
 
 import com.example.labxspringboot.entity.enume.StatusAnalyse;
-import com.example.labxspringboot.entity.enume.StatusResultat;
-import com.example.labxspringboot.entity.enume.TypeAnalyse;
+import com.example.labxspringboot.entity.enume.TypeAnalyseName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,19 +27,16 @@ public class Analyse {
 
     @ManyToOne
     private Utilisateur utilisateurRespo;
-
+    @ToString.Exclude
     @OneToMany(mappedBy = "analyse" , cascade = CascadeType.ALL)
+    @JsonIgnore  // Add this annotation to break the loop
     private List<TestAnalyse> testAnalyses;
 
-    @Enumerated(EnumType.STRING)
-    private TypeAnalyse typeAnalyse;
+
 
     private String dateDebutAnalyse;
 
     private String dateFinAnalyse;
-
-    @Enumerated(EnumType.STRING)
-    private StatusResultat status;
 
     @Enumerated(EnumType.STRING)
     private StatusAnalyse statusAnalyse;
@@ -47,5 +45,8 @@ public class Analyse {
 
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
+
+    @ManyToOne
+    private TypeAnalyse TypeAnalyseDeAnalyse;
 
 }

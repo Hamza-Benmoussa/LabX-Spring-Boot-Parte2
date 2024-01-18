@@ -1,8 +1,11 @@
 package com.example.labxspringboot.service.impl;
 
+import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.dto.EchantillonDto;
 import com.example.labxspringboot.entity.Echantillon;
+import com.example.labxspringboot.entity.enume.TypeAnalyseName;
 import com.example.labxspringboot.repository.IEchantillonRepository;
+import com.example.labxspringboot.service.IAnalyseService;
 import com.example.labxspringboot.service.IEchantillonService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,12 +22,28 @@ public class EchantillonServiceImpl implements IEchantillonService {
     @Autowired
     private IEchantillonRepository echantillonRepository;
 
+    @Autowired
+    private IAnalyseService iAnalyseService;
+
     private final ModelMapper modelMapper;
 
     @Override
     public EchantillonDto saveEchantillon(EchantillonDto echantillonDto) {
         Echantillon echantillon = modelMapper.map(echantillonDto, Echantillon.class);
+
+        // Sauvegarder l'échantillon sans associer d'analyse pour le moment
         Echantillon savedEchantillon = echantillonRepository.save(echantillon);
+
+        // Créer une nouvelle analyse associée à l'échantillon
+        AnalyseDto analyseDto = new AnalyseDto();
+
+        // Ajoutez d'autres détails de l'analyse si nécessaire
+        AnalyseDto savedAnalyseDto = iAnalyseService.createAnalyseForEchantillon(savedEchantillon, analyseDto);
+
+        // Mettre à jour l'échantillon avec la liste d'analyses
+//        savedEchantillon.setAnalyses(Collections.singletonList(modelMapper.map(savedAnalyseDto, Analyse.class)));
+//        echantillonRepository.save(savedEchantillon);
+
         return modelMapper.map(savedEchantillon, EchantillonDto.class);
     }
 

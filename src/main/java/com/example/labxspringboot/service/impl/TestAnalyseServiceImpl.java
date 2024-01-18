@@ -1,6 +1,8 @@
 package com.example.labxspringboot.service.impl;
 
+import com.example.labxspringboot.entity.Norme;
 import com.example.labxspringboot.entity.TestAnalyse;
+import com.example.labxspringboot.entity.enume.StatusResultat;
 import com.example.labxspringboot.repository.ITestAnalyseRepository;
 import com.example.labxspringboot.service.ITestAnalyseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +41,18 @@ public class TestAnalyseServiceImpl implements ITestAnalyseService {
     public void deleteTestAnalyse(Long id) {
         testRepository.deleteById(id);
     }
+
+    @Override
+    public StatusResultat generateStatusTest(TestAnalyse testAnalyse) {
+        Norme norme = testAnalyse.getNorme();
+        if (testAnalyse.getResultatNmbr() >= norme.getMin() && testAnalyse.getResultatNmbr() <= norme.getMax()) {
+                // Result is normal
+            return StatusResultat.NORMAL;
+            } else {
+                // Result is abnormal
+            return StatusResultat.ANORMAL;
+            }
+    }
+
+
 }

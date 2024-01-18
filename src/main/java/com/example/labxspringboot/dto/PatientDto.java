@@ -4,6 +4,7 @@ import com.example.labxspringboot.entity.Echantillon;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class PatientDto implements Serializable {
     String sexe;
     String adresse;
     String numeroTelephone;
+    @ToString.Exclude
     List<Echantillon> historiqueEchantillon;
     boolean deleted;
 }

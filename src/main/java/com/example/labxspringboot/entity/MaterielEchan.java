@@ -1,5 +1,6 @@
 package com.example.labxspringboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class MaterielEchan {
     private String fournisseurNom;
 
     @OneToOne(mappedBy = "materielEchan" , cascade = CascadeType.ALL)
+    @JsonIgnore  // Add this annotation to break the loop
     private Echantillon echantillon;
 
     @Column(name="is_deleted" ,nullable = false)

@@ -3,6 +3,7 @@ package com.example.labxspringboot.dto;
 import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.RoleUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,8 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
+//@JsonIgnoreProperties(value = {"motDePasse"})
+
 public class UtilisateurDto implements Serializable {
     Long id;
     String nomUtilisateur;

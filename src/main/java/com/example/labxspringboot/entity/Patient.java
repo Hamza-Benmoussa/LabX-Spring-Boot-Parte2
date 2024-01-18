@@ -1,8 +1,10 @@
 package com.example.labxspringboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,17 +35,11 @@ public class Patient {
 
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL  , fetch = FetchType.LAZY)
+//    @ElementCollection(fetch = FetchType.LAZY)
+    @JsonIgnore  // Add this annotation to break the loop
+    private List<Echantillon> historiqueEchantillon;
 
-    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL)
-    private List<Echantillon> historiqueAnalyses;
 
-    public Patient(String nom, String prenom, String dateNaissance, String sexe, String adresse, String numeroTelephone, List<Echantillon> historiqueAnalyses) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.dateNaissance = dateNaissance;
-        this.sexe = sexe;
-        this.adresse = adresse;
-        this.numeroTelephone = numeroTelephone;
-        this.historiqueAnalyses = historiqueAnalyses;
-    }
 }

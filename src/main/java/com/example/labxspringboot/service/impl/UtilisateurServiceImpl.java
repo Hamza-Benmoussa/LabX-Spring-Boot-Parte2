@@ -26,24 +26,30 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     public UtilisateurDto saveUtilisateur(UtilisateurDto utilisateurDto) {
         Utilisateur utilisateur=modelMapper.map(utilisateurDto,Utilisateur.class);
         Utilisateur savedUtilisateur=utilisateurRepository.save(utilisateur);
-        return modelMapper.map(savedUtilisateur,UtilisateurDto.class);
+        return maskPasswordInDto(modelMapper.map(savedUtilisateur,UtilisateurDto.class));
     }
 
     @Override
     public List<UtilisateurDto> getUtilisateurs() {
         List<Utilisateur> utilisateurs = utilisateurRepository.findByDeletedFalse();
         return utilisateurs.stream()
-                .map(utilisateur -> modelMapper.map(utilisateur, UtilisateurDto.class))
+                .map(utilisateur -> maskPasswordInDto(modelMapper.map(utilisateur, UtilisateurDto.class)))
                 .collect(Collectors.toList());
     }
     @Override
     public UtilisateurDto getUtilisateurById(Long id) {
         return utilisateurRepository.findByIdAndDeletedFalse(id)
-                .map(utilisateur->modelMapper.map(utilisateur,UtilisateurDto.class))
+                .map(utilisateur-> maskPasswordInDto(modelMapper.map(utilisateur,UtilisateurDto.class)))
                 .orElse(null);
 
     }
 
+    private UtilisateurDto maskPasswordInDto(UtilisateurDto utilisateurDto) {
+        if (utilisateurDto != null) {
+            utilisateurDto.setMotDePasse("****");
+        }
+        return utilisateurDto;
+    }
     @Override
     public UtilisateurDto updateUtilisateur(UtilisateurDto utilisateurDto,Long id) {
         Utilisateur existingUser = utilisateurRepository.findByIdAndDeletedFalse(id).orElse(null);

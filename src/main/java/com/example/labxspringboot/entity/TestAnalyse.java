@@ -30,8 +30,7 @@ public class TestAnalyse {
     @ManyToOne
     private Analyse analyse;
 
-    @OneToOne
-    private Reactif reactif;
+
 
     @OneToOne
     private Norme norme;

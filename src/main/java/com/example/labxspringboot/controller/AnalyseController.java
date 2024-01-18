@@ -3,6 +3,7 @@ package com.example.labxspringboot.controller;
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.service.IAnalyseService;
 import com.example.labxspringboot.service.impl.AnalyseServiceImpl;
+import com.example.labxspringboot.service.impl.TypeAnalyseServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,12 @@ public class AnalyseController {
 
     @Autowired
     private AnalyseServiceImpl analyseService;
+    @Autowired
+    TypeAnalyseServiceImpl typeAnalyseService ;
 
     @PostMapping
     public ResponseEntity<AnalyseDto> saveAnalyse(@RequestBody AnalyseDto analyseDto) {
+        typeAnalyseService.saveAnalyse(analyseDto);
         AnalyseDto savedAnalyseDto = analyseService.saveAnalyse(analyseDto);
         return new ResponseEntity<>(savedAnalyseDto, HttpStatus.CREATED);
     }

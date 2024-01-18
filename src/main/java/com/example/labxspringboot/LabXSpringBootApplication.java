@@ -1,17 +1,7 @@
 package com.example.labxspringboot;
 
-import com.example.labxspringboot.entity.*;
-import com.example.labxspringboot.entity.enume.RoleUser;
-import com.example.labxspringboot.entity.enume.StatusAnalyse;
-import com.example.labxspringboot.entity.enume.StatusResultat;
-import com.example.labxspringboot.entity.enume.TypeAnalyse;
-import com.example.labxspringboot.service.impl.*;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.util.ArrayList;
 
 @SpringBootApplication
 public class LabXSpringBootApplication {

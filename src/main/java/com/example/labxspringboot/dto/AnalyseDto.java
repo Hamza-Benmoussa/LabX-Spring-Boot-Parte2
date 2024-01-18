@@ -1,11 +1,13 @@
 package com.example.labxspringboot.dto;
 
+import com.example.labxspringboot.entity.Echantillon;
+import com.example.labxspringboot.entity.TestAnalyse;
+import com.example.labxspringboot.entity.TypeAnalyse;
+import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.StatusAnalyse;
-import com.example.labxspringboot.entity.enume.StatusResultat;
-import com.example.labxspringboot.entity.enume.TypeAnalyse;
+import com.example.labxspringboot.entity.enume.TypeAnalyseName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,15 +19,14 @@ import java.util.List;
 @NoArgsConstructor
 public class AnalyseDto implements Serializable {
     Long id;
-    Long echantillonId;
-    Long utilisateurId;
-    List<Long> testAnalysisIds;
+    Echantillon echantillon;
+    Utilisateur utilisateurRespo;
     TypeAnalyse typeAnalyse;
     String dateDebutAnalyse;
     String dateFinAnalyse;
-    StatusResultat status;
     StatusAnalyse statusAnalyse;
     String commentaires;
+    List<TestAnalyse> testAnalyses;
     boolean deleted;
 
 }
