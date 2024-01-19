@@ -18,15 +18,6 @@ public class AnalyseController {
 
     @Autowired
     private AnalyseServiceImpl analyseService;
-    @Autowired
-    TypeAnalyseServiceImpl typeAnalyseService ;
-
-    @PostMapping
-    public ResponseEntity<AnalyseDto> saveAnalyse(@RequestBody AnalyseDto analyseDto) {
-        typeAnalyseService.saveAnalyse(analyseDto);
-        AnalyseDto savedAnalyseDto = analyseService.saveAnalyse(analyseDto);
-        return new ResponseEntity<>(savedAnalyseDto, HttpStatus.CREATED);
-    }
 
     @GetMapping
     public ResponseEntity<List<AnalyseDto>> getAllAnalyses() {

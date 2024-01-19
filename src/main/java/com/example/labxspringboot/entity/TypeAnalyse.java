@@ -1,6 +1,5 @@
 package com.example.labxspringboot.entity;
 
-import com.example.labxspringboot.entity.enume.TypeAnalyseName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,16 +19,15 @@ public class TypeAnalyse {
     @Id
     @GeneratedValue
     private Long id ;
-    @Enumerated(EnumType.STRING)
-    private TypeAnalyseName typeAnalyseName;
+    private String nom;
     @ToString.Exclude
+    @OneToMany(mappedBy = "typeAnalyse" , cascade = CascadeType.ALL)
     @JsonIgnore
-    @OneToMany(mappedBy = "typeAnalyse" , cascade = CascadeType.ALL )
     @Fetch(FetchMode.SUBSELECT)
-    List<Norme> normes;
-    @ToString.Exclude
-    @JsonIgnore
-    @OneToMany(mappedBy = "TypeAnalyseDeAnalyse" ,cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SUBSELECT)
-    List<Analyse> analyses;
+    private List<TestAnalyse> testAnalyses;
+    @ManyToOne
+    private Analyse analyse;
+    @Column(name="is_deleted" ,nullable = false)
+    private boolean deleted;
+
 }

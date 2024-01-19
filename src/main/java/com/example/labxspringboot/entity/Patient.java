@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,9 +38,10 @@ public class Patient {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
     @ToString.Exclude
-    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL  , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL  )
 //    @ElementCollection(fetch = FetchType.LAZY)
     @JsonIgnore  // Add this annotation to break the loop
+    @Fetch(FetchMode.SUBSELECT)
     private List<Echantillon> historiqueEchantillon;
 
 

@@ -3,7 +3,6 @@ package com.example.labxspringboot.service.impl;
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.dto.EchantillonDto;
 import com.example.labxspringboot.entity.Echantillon;
-import com.example.labxspringboot.entity.enume.TypeAnalyseName;
 import com.example.labxspringboot.repository.IEchantillonRepository;
 import com.example.labxspringboot.service.IAnalyseService;
 import com.example.labxspringboot.service.IEchantillonService;

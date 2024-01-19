@@ -1,44 +1,55 @@
 package com.example.labxspringboot.controller;
 
-import com.example.labxspringboot.entity.Norme;
+import com.example.labxspringboot.dto.TestAnalyseDto;
 import com.example.labxspringboot.entity.TestAnalyse;
-import com.example.labxspringboot.service.impl.NormeServiceImpl;
-import com.example.labxspringboot.service.impl.TestAnalyseServiceImpl;
+import com.example.labxspringboot.service.ITestAnalyseService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/testanalyse")
 public class TestAnalyseController {
-    @Autowired
-    private TestAnalyseServiceImpl testAnalyseService;
 
+    @Autowired
+    private ITestAnalyseService testAnalyseService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping
-    public ResponseEntity<TestAnalyse> saveTestAnalyse(@RequestBody TestAnalyse testAnalyse){
-        return new ResponseEntity<TestAnalyse>(testAnalyseService.saveTestAnalyse(testAnalyse) , HttpStatus.CREATED);
+    public ResponseEntity<TestAnalyseDto> saveTestAnalyse(@RequestBody TestAnalyseDto testAnalyseDto) {
+        TestAnalyseDto savedTestAnalyse = testAnalyseService.saveTestAnalyse(testAnalyseDto);
+        return new ResponseEntity<>(savedTestAnalyse, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<TestAnalyse> getAllTestAnalyses(){
-        return testAnalyseService.getTestAnalyses();
+    public List<TestAnalyseDto> getAllTestAnalyses() {
+        return testAnalyseService.getTestAnalyses().stream()
+                .map(testAnalyse -> modelMapper.map(testAnalyse, TestAnalyseDto.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TestAnalyse> getTestAnalyseById(@PathVariable ("id") Long testAnalyseId){
-        return new ResponseEntity<TestAnalyse>(testAnalyseService.getTestAnalyseById(testAnalyseId) ,HttpStatus.OK);
+    public ResponseEntity<TestAnalyseDto> getTestAnalyseById(@PathVariable("id") Long testAnalyseId) {
+        TestAnalyseDto testAnalyseDto = testAnalyseService.getTestAnalyseById(testAnalyseId);
+        return ResponseEntity.ok(testAnalyseDto);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<TestAnalyse> updateTestAnalyse(@PathVariable ("id") Long id , @RequestBody TestAnalyse testAnalyse){
-        return new ResponseEntity<TestAnalyse>(testAnalyseService.updateTestAnalyse(testAnalyse,id) ,HttpStatus.OK);
+    public ResponseEntity<TestAnalyseDto> updateTestAnalyse(@PathVariable("id") Long id,
+                                                            @RequestBody TestAnalyseDto testAnalyseDto) {
+        return ResponseEntity.ok(testAnalyseService.updateTestAnalyse(testAnalyseDto, id));
     }
-    @GetMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteTestAnalyse(@PathVariable ("id") Long id){
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTestAnalyse(@PathVariable("id") Long id) {
         testAnalyseService.deleteTestAnalyse(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("TestAnalyse with id "+id+"was deleted succes");
     }
 }

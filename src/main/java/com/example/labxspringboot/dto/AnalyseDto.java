@@ -5,9 +5,9 @@ import com.example.labxspringboot.entity.TestAnalyse;
 import com.example.labxspringboot.entity.TypeAnalyse;
 import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.StatusAnalyse;
-import com.example.labxspringboot.entity.enume.TypeAnalyseName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,13 +20,14 @@ import java.util.List;
 public class AnalyseDto implements Serializable {
     Long id;
     Echantillon echantillon;
+    String nom;
     Utilisateur utilisateurRespo;
-    TypeAnalyse typeAnalyse;
     String dateDebutAnalyse;
     String dateFinAnalyse;
     StatusAnalyse statusAnalyse;
     String commentaires;
-    List<TestAnalyse> testAnalyses;
+    @ToString.Exclude
+    List<TypeAnalyse> typeAnalyses;
     boolean deleted;
 
 }

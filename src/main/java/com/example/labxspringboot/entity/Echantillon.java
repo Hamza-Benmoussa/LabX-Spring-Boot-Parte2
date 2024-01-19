@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,10 +27,11 @@ public class Echantillon {
     @ManyToOne
     private Patient patient;
 
-    @OneToOne
+    @ManyToOne
     private MaterielEchan materielEchan;
     @ToString.Exclude
-    @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
     @JsonIgnore  // Add this annotation to break the loop
     private List<Analyse> analyses;
 

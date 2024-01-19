@@ -1,11 +1,16 @@
 package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.Norme;
+import com.example.labxspringboot.entity.Reactif;
+import com.example.labxspringboot.entity.TestAnalyse;
+import com.example.labxspringboot.entity.TypeAnalyse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * DTO for {@link Norme}
@@ -18,5 +23,9 @@ public class NormeDto implements Serializable {
     double min;
     double max;
     String unite;
+    TypeAnalyse typeAnalyse;
+    Reactif reactif;
+    @ToString.Exclude
+    List<TestAnalyse> testAnalyses;
     boolean deleted;
 }

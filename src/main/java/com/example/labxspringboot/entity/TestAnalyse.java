@@ -28,11 +28,12 @@ public class TestAnalyse {
     private float resultatNmbr;
 
     @ManyToOne
-    private Analyse analyse;
+    private TypeAnalyse typeAnalyse;
 
 
-
-    @OneToOne
+    @ManyToOne
+    private Reactif reactif;
+    @ManyToOne
     private Norme norme;
 
     @Column(name="is_deleted" ,nullable = false)
