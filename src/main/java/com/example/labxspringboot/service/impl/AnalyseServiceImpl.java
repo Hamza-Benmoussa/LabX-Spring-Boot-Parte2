@@ -3,7 +3,6 @@ package com.example.labxspringboot.service.impl;
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.entity.Analyse;
 import com.example.labxspringboot.entity.Echantillon;
-import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.repository.IAnalyseRepository;
 import com.example.labxspringboot.service.IAnalyseService;
 import lombok.AllArgsConstructor;
@@ -64,10 +63,43 @@ public class AnalyseServiceImpl implements IAnalyseService {
     }
 
     @Override
+    public List<Object[]> printResultAnalyse(Long id) {
+        return iAnalyseRepository.getAnalysisReport(id);
+    }
+
+    @Override
     public AnalyseDto createAnalyseForEchantillon(Echantillon echantillon, AnalyseDto analyseDto) {
         Analyse analyse = modelMapper.map(analyseDto, Analyse.class);
         analyse.setEchantillon(echantillon);
         Analyse savedAnalyse = iAnalyseRepository.save(analyse);
         return modelMapper.map(savedAnalyse, AnalyseDto.class);
     }
+
+
+//    public List<AnalyseReportDTO> getAnalysisReport(Long id) {
+//        List<Object[]> results = iAnalyseRepository.getAnalysisReport(id);
+//        return mapResultsToDTOs(results);
+//    }
+
+//    private List<AnalyseReportDTO> mapResultsToDTOs(List<Object[]> results) {
+//        List<AnalyseReportDTO> dtos = new ArrayList<>();
+//
+//        for (Object[] result : results) {
+//            AnalyseReportDTO dto = new AnalyseReportDTO();
+//            dto.setAnalyseName(String.valueOf(result[0]));
+//            dto.setTypeAnalyseName(String.valueOf(result[1]));
+//            dto.setTestDescription(String.valueOf(result[2]));
+//            dto.setNormDescription(String.valueOf(result[3]));
+//            dto.setStatusResultat(String.valueOf(result[4]));
+//            dto.setPatientName(String.valueOf(result[5]));
+//            dto.setPatientSurname(String.valueOf(result[6]));
+//            dto.setPatientPhoneNumber(String.valueOf(result[7]));
+//            dto.setPatientAddress(String.valueOf(result[8]));
+//            dto.setPatientDateOfBirth(String.valueOf(result[9]));
+//            dtos.add(dto);
+//        }
+//
+//        return dtos;
+//    }
+
 }

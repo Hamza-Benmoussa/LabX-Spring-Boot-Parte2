@@ -15,4 +15,6 @@ public interface IAnalyseService {
 
     void deleteAnalyse(Long id);
 
+    List<Object[]> printResultAnalyse(Long id);
+
 }

@@ -24,8 +24,6 @@ import static org.checkerframework.checker.units.UnitsTools.min;
 class NormeServiceImplTest {
     @Autowired
     private INormeService iNormeService;
-    @Autowired
-    private ModelMapper modelMapper;
     @Rollback(value = false)
     @ParameterizedTest
     @CsvFileSource(resources = "/listTest.csv", numLinesToSkip = 1)

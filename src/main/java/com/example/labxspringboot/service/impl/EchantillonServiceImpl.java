@@ -39,10 +39,6 @@ public class EchantillonServiceImpl implements IEchantillonService {
         // Ajoutez d'autres détails de l'analyse si nécessaire
         AnalyseDto savedAnalyseDto = iAnalyseService.createAnalyseForEchantillon(savedEchantillon, analyseDto);
 
-        // Mettre à jour l'échantillon avec la liste d'analyses
-//        savedEchantillon.setAnalyses(Collections.singletonList(modelMapper.map(savedAnalyseDto, Analyse.class)));
-//        echantillonRepository.save(savedEchantillon);
-
         return modelMapper.map(savedEchantillon, EchantillonDto.class);
     }
 

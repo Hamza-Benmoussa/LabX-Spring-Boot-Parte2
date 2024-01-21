@@ -23,8 +23,6 @@ public class NormeDto implements Serializable {
     double min;
     double max;
     String unite;
-    TypeAnalyse typeAnalyse;
-    Reactif reactif;
     @ToString.Exclude
     List<TestAnalyse> testAnalyses;
     boolean deleted;
