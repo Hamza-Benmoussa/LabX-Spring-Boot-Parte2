@@ -25,4 +25,8 @@ public class UtilisateurDto implements Serializable {
     String motDePasse;
     RoleUser role;
     boolean deleted;
+
+    public UtilisateurDto(String s1, String s, RoleUser technicien) {
+
+    }
 }

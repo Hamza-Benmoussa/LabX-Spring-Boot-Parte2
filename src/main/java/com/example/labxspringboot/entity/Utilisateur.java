@@ -31,6 +31,10 @@ public class Utilisateur {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
+    public Utilisateur(String s1, String s, RoleUser technicien) {
+
+    }
+
 //    @OneToMany(mappedBy = "utilisateur")
 //    private List<RapportStatis> generateursRapports;
 

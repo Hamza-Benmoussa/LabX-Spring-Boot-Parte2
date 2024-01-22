@@ -35,6 +35,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -87,7 +88,8 @@ public class UtilisateurControllerTest {
         response.andExpect(status().isOk())
                 .andExpect(jsonPath("$.nomUtilisateur", CoreMatchers.is(utilisateurDto.getNomUtilisateur())))
                // .andExpect(MockMvcResultMatchers.jsonPath("$.motDePasse", CoreMatchers.is(utilisateurDto.getMotDePasse())))
-                .andExpect(jsonPath("$.role", CoreMatchers.is(utilisateurDto.getRole().toString())));
+                .andExpect(jsonPath("$.role", CoreMatchers.is(utilisateurDto.getRole().toString())))
+                .andDo(print());
     }
     @Test
     public void GetAllUsers() throws Exception{

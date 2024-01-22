@@ -32,4 +32,6 @@ public class MaterielEchan {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
+    public MaterielEchan(String s, int i, String s1, String hello) {
+    }
 }

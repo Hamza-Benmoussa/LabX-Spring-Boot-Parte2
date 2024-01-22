@@ -42,4 +42,7 @@ public class Patient {
     private List<Echantillon> historiqueEchantillon;
 
 
+    public Patient(String s3, String s4, String s5, String s, String s1, String s2) {
+
+    }
 }

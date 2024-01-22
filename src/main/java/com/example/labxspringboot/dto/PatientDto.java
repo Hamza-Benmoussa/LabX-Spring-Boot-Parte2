@@ -26,4 +26,9 @@ public class PatientDto implements Serializable {
     @ToString.Exclude
     List<Echantillon> historiqueEchantillon;
     boolean deleted;
+
+    public PatientDto(String pikachu, String pokemon, String male, String s, String s1, String s2) {
+
+
+    }
 }
