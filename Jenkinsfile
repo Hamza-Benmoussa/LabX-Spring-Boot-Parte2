@@ -10,7 +10,7 @@ pipeline {
 
         stage('Test Connection') {
             steps {
-                bat 'successfully connected '
+                echo 'successfully connected '
             }
         }
     }
