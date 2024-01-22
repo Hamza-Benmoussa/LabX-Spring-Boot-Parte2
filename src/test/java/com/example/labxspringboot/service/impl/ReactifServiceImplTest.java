@@ -1,25 +1,65 @@
-//package com.example.labxspringboot.service.impl;
-//
-//import com.example.labxspringboot.entity.Reactif;
-//import com.example.labxspringboot.service.IReactifService;
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.context.junit.jupiter.SpringExtension;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//@SpringBootTest
-//@ExtendWith(SpringExtension.class)
-//@Transactional
-//public class ReactifServiceImplTest {
-//
+package com.example.labxspringboot.service.impl;
+
+import com.example.labxspringboot.dto.ReactifDto;
+import com.example.labxspringboot.service.IReactifService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
+
+    @SpringBootTest
+    @ExtendWith(SpringExtension.class)
+    @Transactional
+    public class ReactifServiceImplTest {
+
+        @Autowired
+        private IReactifService iReactifService;
+
+        @ParameterizedTest
+        @CsvFileSource(resources = "/listreactif.csv", numLinesToSkip = 1)
+        void saveReactif(String name, String description, int quantiteStock, String dateExpiration, String fournisseurNom) {
+            ReactifDto reactifDto = new ReactifDto();
+            reactifDto.setNom(name);
+            reactifDto.setDescription(description);
+            reactifDto.setQuantiteStock(quantiteStock);
+            reactifDto.setDateExpiration(dateExpiration);
+            reactifDto.setFournisseurNom(fournisseurNom);
+            reactifDto.setDeleted(false);
+
+            iReactifService.saveReactif(reactifDto); // Corrected line
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    @Autowired
 //    private IReactifService reactifService;
 //
@@ -71,4 +111,4 @@
 //        reactifService.deleteReactif(testReactif.getId());
 //        assertNull(reactifService.getReactifById(testReactif.getId()), "Reactif should be deleted");
 //    }
-//}
+    }

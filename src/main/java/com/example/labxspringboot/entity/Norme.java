@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,13 +32,8 @@ public class Norme {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
-    @ManyToOne
-    private TypeAnalyse typeAnalyse;
-
-    @ManyToOne
-    private Reactif reactif;
-
-    @OneToOne(mappedBy = "norme" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "norme" ,cascade = CascadeType.ALL)
     @JsonIgnore  // Add this annotation to break the loop
-    private TestAnalyse testAnalyse;
+    @Fetch(FetchMode.SUBSELECT)
+    private List<TestAnalyse> testAnalyse;
 }

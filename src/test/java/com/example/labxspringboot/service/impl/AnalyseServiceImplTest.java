@@ -1,147 +1,146 @@
-//package com.example.labxspringboot.service.impl;
-//
-//import com.example.labxspringboot.entity.*;
-//import com.example.labxspringboot.entity.enume.RoleUser;
-//import com.example.labxspringboot.entity.enume.StatusAnalyse;
-//import com.example.labxspringboot.entity.enume.StatusResultat;
-//import com.example.labxspringboot.entity.enume.TypeAnalyse;
-//import com.example.labxspringboot.service.*;
-//import org.junit.jupiter.api.AfterEach;
-//import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.annotation.Rollback;
-//import org.springframework.test.context.junit.jupiter.SpringExtension;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//@SpringBootTest
-//@ExtendWith(SpringExtension.class)
-//@Transactional
-//public class AnalyseServiceImplTest {
-//
-//    @Autowired
-//    private IAnalyseService iAnalyseService;
-//
-//    @Autowired
-//    private IEchantillonService iEchantillonService;
-//
-//    @Autowired
-//    private IUtilisateurService iUtilisateurService;
-//    @Autowired
-//    private IPatientService iPatientService;
-//
-//    @Autowired
-//    private IMaterialEchanService iMaterialEchanService;
-//
-//    private Analyse testAnalyse;
-//    private Echantillon testEchantillon;
-//    private MaterielEchan testMaterielEchan;
-//    private Technicien testTechnicien;
-//    private Patient testPatient;
-//
-//    @Rollback(value = false)
-// @Test
-//    void setUp() {
-//        // Create a Patient
-//        Patient patient = new Patient();
-//        patient.setNom("TestPatient");
-//        patient.setPrenom("khona");
-//        patient.setDateNaissance("2002");
-//        patient.setSexe("homme");
-//        patient.setAdresse("casa");
-//        patient.setNumeroTelephone("044654645");
-//        iPatientService.savePatient(patient);
-//
-////         Create a Technicien
-//        Technicien technicien = new Technicien();
-//
-//        technicien.setNomUtilisateur("miko");
-//        technicien.setMotDePasse("152");
-//        technicien.setSpecialiteTechnicien("technicien");
-//        technicien.setRole(RoleUser.TECHNICIEN);
-//        iUtilisateurService.saveUtilisateur(technicien);
-//
-//        ResponsableLabo responsableLabo = new ResponsableLabo();
-//
-//        responsableLabo.setNomUtilisateur("TestResponsable");
-//        responsableLabo.setMotDePasse("1234");
-//        responsableLabo.setFonctionResponsable("responsable");
-//        responsableLabo.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
-//        iUtilisateurService.saveUtilisateur(responsableLabo);
-//
-//        // Create a MaterielEchan
-//        testMaterielEchan = new MaterielEchan("TestMaterielEchan", 10, "2025-01-01", "TestFournisseur");
-//        iMaterialEchanService.saveMaterialEchan(testMaterielEchan);
-//
-//        // Create an Echantillon
-//        testEchantillon = new Echantillon(testPatient, testMaterielEchan, new ArrayList<>(), testTechnicien, "2023-01-01");
-//        testEchantillon.setTechnicienEch(technicien);
-//        testEchantillon.setMaterielEchan(testMaterielEchan);
-//        testEchantillon.setPatient(patient);
-//        iEchantillonService.saveEchantillon(testEchantillon);
-//
-//        // Create and save an Analyse
-//        testAnalyse = new Analyse(testEchantillon, null, null, TypeAnalyse.HEMATOLOGIE, "2022", "2023", StatusResultat.NORMAL, StatusAnalyse.EN_COURS_ANALYSE, "Test Comment");
-//        testAnalyse.setResponsableLaboAnalyse(responsableLabo);
-//        iAnalyseService.saveAnalyse(testAnalyse);
-//    }
-//
-////    @AfterEach
-////    void tearDown() {
-////        if (iAnalyseService.getAnalyseById(testAnalyse.getId()) != null) {
-////
-////            iAnalyseService.deleteAnalyse(testAnalyse.getId());
-////            iMaterialEchanService.deleteMaterialEchan(testMaterielEchan.getId());
-////            iPatientService.deletePatient(testPatient.getId());
-////            iUtilisateurService.deleteUtilisateur(testTechnicien.getId());
-////
-////            iUtilisateurService.deleteUtilisateur();
-////        }
-////    }
-//
-//    @Rollback(value = false)
-//    @Test
-//    void saveAnalyse() {
-//
-//        assertNotNull(1L, "Analyse ID should not be null after saving");
-//    }
-//
-//    @Rollback(value = false)
-//    @Test
-//    void getAnalyseById() {
-//        Analyse retrievedAnalyse = iAnalyseService.getAnalyseById(1L);
-//        assertNotNull(retrievedAnalyse, "Retrieved analysis should not be null");
-//        assertEquals(1L, retrievedAnalyse.getId(), "IDs should match");
-//    }
-//
-//    @Rollback(value = false)
-//    @Test
-//    void updateAnalyse() {
-//        assertNotNull(1L, "Analyse ID should not be null before updating");
-//        testAnalyse.setCommentaires("Updated Comment");
-//        Analyse updatedAnalyse = iAnalyseService.updateAnalyse(testAnalyse,1L) ;
-//        assertEquals("Updated Comment", updatedAnalyse.getCommentaires(), "Comment should be updated");
-//    }
-//
-//    @Rollback(value = false)
-//    @Test
-//    void getAllAnalyses() {
-//        List<Analyse> analyses = iAnalyseService.getAnalyses();
-//        assertFalse(analyses.isEmpty());
-//    }
-//
-//    @Rollback(value = false)
-//    @Test
-//    void deleteAnalyse() {
-//        iAnalyseService.deleteAnalyse(1L);
-//        assertNull(iAnalyseService.getAnalyseById(testAnalyse.getId()), "Analysis should be deleted");
-//    }
-//}
+package com.example.labxspringboot.service.impl;
+
+import com.example.labxspringboot.dto.*;
+import com.example.labxspringboot.entity.Echantillon;
+import com.example.labxspringboot.entity.MaterielEchan;
+import com.example.labxspringboot.entity.Patient;
+import com.example.labxspringboot.entity.Utilisateur;
+import com.example.labxspringboot.entity.enume.RoleUser;
+import com.example.labxspringboot.entity.enume.StatusAnalyse;
+import com.example.labxspringboot.service.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.text.ParseException;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@Transactional
+class AnalyseServiceImplTest {
+
+    @Autowired
+    private IEchantillonService iEchantillonService;
+
+    @Autowired
+    private IPatientService iPatientService;
+    @Autowired
+    private IMaterialEchanService iMaterialEchanService;
+    @Autowired
+    private IAnalyseService iAnalyseService;
+
+    @Autowired
+    private IUtilisateurService iUtilisateurService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    private PatientDto patientDTO;
+    private MaterielEchanDto materielEchanDto;
+    private UtilisateurDto utilisateurDTO;
+    private UtilisateurDto utilisateurDTO1;
+    private EchantillonDto echantillonDTO;
+    private AnalyseDto analyseDto;
+
+    @BeforeEach
+    void setUp() throws ParseException {
+        // Create a sample Patient
+        patientDTO = new PatientDto();
+        patientDTO.setNom("mohammed");
+        patientDTO.setPrenom("prenom mohammed");
+        patientDTO.setAdresse("qwerty");
+        patientDTO.setNumeroTelephone("02125232525");
+        patientDTO.setSexe("Male");
+        patientDTO.setDateNaissance("2000");
+        patientDTO = iPatientService.savePatient(patientDTO);
+
+        materielEchanDto = new MaterielEchanDto();
+        materielEchanDto.setNomechan("lhyt man");
+        materielEchanDto.setFournisseurNom("lol");
+        materielEchanDto.setDateExpirationEchan("2525");
+        materielEchanDto.setQuantiteStockEhcna(10);
+        materielEchanDto = iMaterialEchanService.saveMaterialEchan(materielEchanDto);
+
+        // Create a sample Utilisateur
+        utilisateurDTO = new UtilisateurDto();
+        utilisateurDTO.setNomUtilisateur("moko");
+        utilisateurDTO.setMotDePasse("123");
+        utilisateurDTO.setRole(RoleUser.TECHNICIEN);
+        utilisateurDTO = iUtilisateurService.saveUtilisateur(utilisateurDTO);
+
+        //Create utilisateur respo
+
+        utilisateurDTO1 = new UtilisateurDto();
+        utilisateurDTO1.setNomUtilisateur("manidi");
+        utilisateurDTO1.setMotDePasse("123");
+        utilisateurDTO1.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
+        utilisateurDTO1 = iUtilisateurService.saveUtilisateur(utilisateurDTO1);
+
+        // Create EchantillonDTO
+        echantillonDTO = new EchantillonDto();
+        echantillonDTO.setPatient(modelMapper.map(patientDTO, Patient.class));
+        echantillonDTO.setUtilisateurTechnicien(modelMapper.map(utilisateurDTO, Utilisateur.class));
+        echantillonDTO.setMaterielEchan(modelMapper.map(materielEchanDto, MaterielEchan.class));
+        echantillonDTO.setDatePrelevement("2525");
+        echantillonDTO = iEchantillonService.saveEchantillon(echantillonDTO);
+
+        //Create Analyse
+
+        analyseDto =new AnalyseDto();
+        analyseDto.setCommentaires("ahah");
+        analyseDto.setEchantillon(modelMapper.map(echantillonDTO , Echantillon.class));
+        analyseDto.setStatusAnalyse(StatusAnalyse.EN_COURS_ANALYSE);
+        analyseDto.setDateFinAnalyse("2020");
+        analyseDto.setDateFinAnalyse("2022");
+        analyseDto.setUtilisateurRespo(modelMapper.map(utilisateurDTO1,Utilisateur.class));
+        analyseDto =iAnalyseService.saveAnalyse(analyseDto);
+
+    }
+
+    @Test
+    void saveAnalyse() {
+        // Assertions
+        assertNotNull(analyseDto.getId(), "Analyse ID should not be null");
+        assertEquals("ahah", analyseDto.getCommentaires(), "Commentaires should match");
+        // Add more assertions as needed
+    }
+
+    @Test
+    void getAnalyses() {
+        // Retrieve all analyses
+        List<AnalyseDto> analyses = iAnalyseService.getAnalyses();
+        assertNotNull(analyses, "List of analyses should not be null");
+        assertFalse(analyses.isEmpty(), "List of analyses should not be empty");
+    }
+
+    @Test
+    void getAnalyseById() {
+        // Retrieve the previously saved analyse
+        AnalyseDto retrievedAnalyse = iAnalyseService.getAnalyseById(analyseDto.getId());
+        assertNotNull(retrievedAnalyse, "Analyse should be retrieved");
+        assertEquals(analyseDto.getCommentaires(), retrievedAnalyse.getCommentaires(), "Commentaires should match");
+    }
+
+    @Test
+    void updateAnalyse() {
+        // Update the status of the analyse
+        analyseDto.setStatusAnalyse(StatusAnalyse.TERMINE);
+        AnalyseDto updatedAnalyse = iAnalyseService.updateAnalyse(analyseDto, analyseDto.getId());
+        assertNotNull(updatedAnalyse, "Updated analyse should not be null");
+        assertEquals(StatusAnalyse.TERMINE, updatedAnalyse.getStatusAnalyse(), "Status should be updated");
+    }
+
+    @Test
+    void deleteAnalyse() {
+        // Delete the analyse
+        iAnalyseService.deleteAnalyse(analyseDto.getId());
+        // Check if the analyse is marked as deleted
+        AnalyseDto deletedAnalyse = iAnalyseService.getAnalyseById(analyseDto.getId());
+        assertNull(deletedAnalyse, "Analyse should be deleted");
+    }
+}

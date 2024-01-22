@@ -123,6 +123,9 @@ public class PatientControllerTest {
                 .andExpect(jsonPath("$[0].prenom").value("Doe"))
                 .andExpect(jsonPath("$[0].sexe").value("Male"));
                    }
+
+
+
     @Test
     public void UpdatePatientTest() throws Exception {
         Long patientId = 1L;
@@ -150,5 +153,6 @@ public class PatientControllerTest {
 
         response.andExpect(status().isOk());
     }
-}
 
+
+}

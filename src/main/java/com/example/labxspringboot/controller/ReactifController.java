@@ -1,6 +1,7 @@
 package com.example.labxspringboot.controller;
 
 import com.example.labxspringboot.dto.ReactifDto;
+import com.example.labxspringboot.entity.Reactif;
 import com.example.labxspringboot.service.impl.ReactifServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

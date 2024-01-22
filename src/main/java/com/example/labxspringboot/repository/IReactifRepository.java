@@ -13,4 +13,5 @@ public interface IReactifRepository extends JpaRepository<Reactif , Long> {
 
     List<Reactif> findByDeletedFalse();
     Optional<Reactif> findByIdAndDeletedFalse(Long id);
+
 }

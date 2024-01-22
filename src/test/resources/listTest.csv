@@ -1,45 +1,10 @@
-Name,Min,Max,Unit
-Acide urique,2.0,6.0,mg/dL
-Albuminémie (Méthode immunologique),3.5,5.5,g/dL
-Ammoniémie,15,45,µmol/L
-Bilirubine (Totale Directe et Indirecte),0.2,1.0,mg/dL
-Calcium,8.5,10.5,mg/dL
-Chlore,98,106,mmol/L
-Chlore Cholestérol total,,200,mg/dL
-Cholestérol estérifié,,150,mg/dL
-Cholestérol H D L,,40,mg/dL
-Cholestérol L D L,,130,mg/dL
-Cholestérol HDL+ L D L,,45,mg/dL
-Créatinine,0.6,1.2,mg/dL
-Electrophorèse de l'hémoglobine,,,--
-Electrophorèse des lipides,,,--
-Electrophorèse des protides,,,--
-Fer sérique,70,150,µg/dL
-Fer sérique+C T F,250,450,µg/dL
-Fructosamine,,,--
-Glycémie,70,100,mg/dL
-Hémoglobine glycosylée,4.0,6.0,%
-Ionogramme complet( Na, K, Cl, Prot, RA, Ca),,,,--
-Lipides,,,--
-Lipoprotéine A,,30,mg/dL
-Lipoprotéine B,,100,mg/dL
-Lipoprotéine A+B,,130,mg/dL
-Lithium,0.6,1.2,mmol/L
-Magnésium plasmatique,1.7,2.2,mg/dL
-Magnésium erythrocytaire,1.5,2.5,mEq/L
-Oxalates,,,--
-Phosphore minéral,2.5,4.5,mg/dL
-Protéines,6.4,8.3,g/dL
-Potassium,3.5,5.0,mmol/L
-Réserve alcaline,,,--
-Sodium,135,145,mmol/L
-Triglycérides,,150,mg/dL
-Urée,10,20,mg/dL
-Aldolase,,,--
-Amylase,,,--
-CPK,,,--
-CPK(MB),,,--
-G6PDH,,,--
-Gamma glutamyl transférase ( GGT),,,--
-LDH,,,--
-...
+description,min,max,unite
+Hemoglobin,12,18,g/dL
+LDH Level,150,450,U/L
+Glucose Level,70,110,mg/dL
+IgG Concentration,50,500,mg/dL
+Factor VIII Level,50,200,%
+ALT Level,0,40,U/L
+Troponin T Level,0,0.2,ng/mL
+CRP Level,0,3,mg/L
+PT Time,10,14,seconds

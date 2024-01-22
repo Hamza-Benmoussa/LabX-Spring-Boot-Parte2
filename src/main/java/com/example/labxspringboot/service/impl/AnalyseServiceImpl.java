@@ -3,7 +3,6 @@ package com.example.labxspringboot.service.impl;
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.entity.Analyse;
 import com.example.labxspringboot.entity.Echantillon;
-import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.repository.IAnalyseRepository;
 import com.example.labxspringboot.service.IAnalyseService;
 import lombok.AllArgsConstructor;
@@ -64,10 +63,17 @@ public class AnalyseServiceImpl implements IAnalyseService {
     }
 
     @Override
+    public List<Object[]> printResultAnalyse(Long id) {
+        return iAnalyseRepository.getAnalysisReport(id);
+    }
+
+    @Override
     public AnalyseDto createAnalyseForEchantillon(Echantillon echantillon, AnalyseDto analyseDto) {
         Analyse analyse = modelMapper.map(analyseDto, Analyse.class);
         analyse.setEchantillon(echantillon);
         Analyse savedAnalyse = iAnalyseRepository.save(analyse);
         return modelMapper.map(savedAnalyse, AnalyseDto.class);
     }
+
+
 }

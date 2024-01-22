@@ -2,15 +2,20 @@ package com.example.labxspringboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "materielechan")
 public class MaterielEchan {
     @Id
@@ -25,9 +30,10 @@ public class MaterielEchan {
 
     private String fournisseurNom;
 
-    @OneToOne(mappedBy = "materielEchan" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "materielEchan" , cascade = CascadeType.ALL)
     @JsonIgnore  // Add this annotation to break the loop
-    private Echantillon echantillon;
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Echantillon> echantillon;
 
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
