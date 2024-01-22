@@ -76,7 +76,7 @@ public class EchantillonControllerTest {
         echantillonDto.setMaterielEchan(new MaterielEchan("123", 12, "12/12/2021", "hello"));
         echantillonDto.setDatePrelevement("01/01/2023");
 
-   }
+    }
 
     @Test
     public void createEchantillionTest() throws Exception {
@@ -107,7 +107,7 @@ public class EchantillonControllerTest {
                 .content(objectMapper.writeValueAsString(echantillonDto)));
 
         response.andExpect(status().isOk())
-                  .andDo(print());
+                .andDo(print());
 
     }
     @Test
