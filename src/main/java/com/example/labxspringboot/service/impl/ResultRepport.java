@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import com.example.labxspringboot.repository.IAnalyseRepository;
 
-
 import java.io.File;
 import java.util.*;
 
@@ -19,9 +18,10 @@ public class ResultRepport implements IRapportResultatService {
     @Autowired
     private IAnalyseRepository iAnalyseRepository;
 
+    private final String outputPath = "C:\\Users\\hamza\\Desktop";
+
     public byte[] exportRepport(Long id) {
         try {
-            String path = "C:\\Users\\hamza\\Desktop";
             List<Object[]> results = iAnalyseRepository.getAnalysisReport(id);
             List<RapportDto> rapportDtos = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class ResultRepport implements IRapportResultatService {
                 rapportDto.setPrenom(result[2].toString());
                 rapportDto.setNumero(result[3].toString());
                 rapportDto.setAdresse(result[4].toString());
-                rapportDto.setDatenaissancepatient(result[5].toString()); // Utilisez la date en tant que chaîne de caractères
+                rapportDto.setDatenaissancepatient(result[5].toString());
                 rapportDto.setNomtypeanalyse(result[6].toString());
                 rapportDto.setNomtest(result[7].toString());
                 rapportDto.setResultat(result[8].toString());
@@ -51,6 +51,10 @@ public class ResultRepport implements IRapportResultatService {
             parameters.put("createdBy", "Hamza Benmoussa");
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
+            // Save the report file to the specified path
+            String reportFilePath = outputPath + File.separator + "AnalyseReport.pdf";
+            JasperExportManager.exportReportToPdfFile(jasperPrint, reportFilePath);
+
             System.out.println(jasperPrint.toString());
             byte[] reportContent = JasperExportManager.exportReportToPdf(jasperPrint);
 
@@ -59,6 +63,5 @@ public class ResultRepport implements IRapportResultatService {
             System.out.println(ex);
         }
         return new byte[0];
-
     }
-    }
+}

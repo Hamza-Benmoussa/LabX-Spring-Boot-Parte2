@@ -35,10 +35,19 @@ public class Patient {
 
     private String numeroTelephone;
 
+    public Patient(String nom, String prenom, String dateNaissance, String sexe, String adresse, String numeroTelephone) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dateNaissance = dateNaissance;
+        this.sexe = sexe;
+        this.adresse = adresse;
+        this.numeroTelephone = numeroTelephone;
+    }
+
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
     @ToString.Exclude
-    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL  )
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL  ,fetch = FetchType.EAGER)
 //    @ElementCollection(fetch = FetchType.LAZY)
     @JsonIgnore  // Add this annotation to break the loop
     @Fetch(FetchMode.SUBSELECT)

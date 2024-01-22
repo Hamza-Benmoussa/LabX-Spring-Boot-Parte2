@@ -30,7 +30,7 @@ public class Echantillon {
     @ManyToOne
     private MaterielEchan materielEchan;
     @ToString.Exclude
-    @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     @JsonIgnore  // Add this annotation to break the loop
     private List<Analyse> analyses;

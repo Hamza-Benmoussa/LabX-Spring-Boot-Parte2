@@ -34,7 +34,7 @@ public class Reactif {
     @Column(name="is_deleted" , nullable = false)
     private boolean deleted;
 
-    @OneToMany(mappedBy = "reactif" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reactif" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JsonIgnore  // Add this annotation to break the loop
     @Fetch(FetchMode.SUBSELECT)
     private List<TestAnalyse> testAnalyses;

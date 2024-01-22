@@ -21,7 +21,7 @@ public class TypeAnalyse {
     private Long id ;
     private String nom;
     @ToString.Exclude
-    @OneToMany(mappedBy = "typeAnalyse" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "typeAnalyse" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JsonIgnore
     @Fetch(FetchMode.SUBSELECT)
     private List<TestAnalyse> testAnalyses;

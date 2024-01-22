@@ -5,10 +5,11 @@ import com.example.labxspringboot.entity.enume.RoleUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jdk.nashorn.internal.ir.annotations.Ignore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -16,13 +17,17 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-//@JsonIgnoreProperties(value = {"motDePasse"})
-
+@AllArgsConstructor
 public class UtilisateurDto implements Serializable {
+
     Long id;
+
+    @NotNull
     String nomUtilisateur;
     //@JsonIgnore
+    @NotBlank
     String motDePasse;
+    @NotNull
     RoleUser role;
     boolean deleted;
 }

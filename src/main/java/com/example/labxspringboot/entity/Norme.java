@@ -32,7 +32,7 @@ public class Norme {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
-    @OneToMany(mappedBy = "norme" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "norme" ,cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JsonIgnore  // Add this annotation to break the loop
     @Fetch(FetchMode.SUBSELECT)
     private List<TestAnalyse> testAnalyse;

@@ -44,7 +44,7 @@ public class Analyse {
     private boolean deleted;
     @ToString.Exclude
 
-    @OneToMany(mappedBy = "analyse" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "analyse" ,cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JsonIgnore
     @Fetch(FetchMode.SUBSELECT)
     private List<TypeAnalyse> typeAnalyses;

@@ -19,6 +19,6 @@ public class EchantillonDto implements Serializable {
     MaterielEchan materielEchan;
     Utilisateur utilisateurTechnicien;
     String datePrelevement;
-//    List<Analyse> analyses;
+    List<Analyse> analyses;
     boolean deleted;
 }

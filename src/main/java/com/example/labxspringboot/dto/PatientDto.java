@@ -23,7 +23,6 @@ public class PatientDto implements Serializable {
     String sexe;
     String adresse;
     String numeroTelephone;
-//    @ToString.Exclude
-//     List<Echantillon> historiqueEchantillon;
+     List<Echantillon> historiqueEchantillon;
     boolean deleted;
 }

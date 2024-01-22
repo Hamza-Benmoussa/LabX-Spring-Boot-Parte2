@@ -30,10 +30,17 @@ public class MaterielEchan {
 
     private String fournisseurNom;
 
-    @OneToMany(mappedBy = "materielEchan" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "materielEchan" , cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     @JsonIgnore  // Add this annotation to break the loop
     @Fetch(FetchMode.SUBSELECT)
     private List<Echantillon> echantillon;
+
+    public MaterielEchan(String nomechan, int quantiteStockEhcna, String dateExpirationEchan, String fournisseurNom) {
+        this.nomechan = nomechan;
+        this.quantiteStockEhcna = quantiteStockEhcna;
+        this.dateExpirationEchan = dateExpirationEchan;
+        this.fournisseurNom = fournisseurNom;
+    }
 
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;

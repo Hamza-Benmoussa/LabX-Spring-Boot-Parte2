@@ -5,6 +5,7 @@ import com.example.labxspringboot.dto.UtilisateurDto;
 import com.example.labxspringboot.entity.Norme;
 import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.RoleUser;
+import com.example.labxspringboot.exception.exept.UtilisateurFoundException;
 import com.example.labxspringboot.repository.IUtilisateurRepository;
 import com.example.labxspringboot.service.IUtilisateurService;
 import org.modelmapper.ModelMapper;
@@ -37,11 +38,10 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
                 .collect(Collectors.toList());
     }
     @Override
-    public UtilisateurDto getUtilisateurById(Long id) {
+    public UtilisateurDto getUtilisateurById(Long id) throws UtilisateurFoundException {
         return utilisateurRepository.findByIdAndDeletedFalse(id)
                 .map(utilisateur-> maskPasswordInDto(modelMapper.map(utilisateur,UtilisateurDto.class)))
-                .orElse(null);
-
+                .orElseThrow(() -> new UtilisateurFoundException("Utilisateur Not found" + id));
     }
 
     private UtilisateurDto maskPasswordInDto(UtilisateurDto utilisateurDto) {
@@ -71,4 +71,5 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
             utilisateurRepository.save(utilisateur);
         }
     }
+
 }

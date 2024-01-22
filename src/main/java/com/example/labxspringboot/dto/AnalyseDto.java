@@ -27,7 +27,7 @@ public class AnalyseDto implements Serializable {
     StatusAnalyse statusAnalyse;
     String commentaires;
 //    @ToString.Exclude
-//    List<TypeAnalyse> typeAnalyses;
+    List<TypeAnalyse> typeAnalyses;
     boolean deleted;
 
 }
