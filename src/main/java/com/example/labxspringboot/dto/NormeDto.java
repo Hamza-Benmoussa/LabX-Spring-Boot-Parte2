@@ -2,10 +2,7 @@ package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.Norme;
 import com.example.labxspringboot.entity.Reactif;
-<<<<<<< HEAD
-=======
 import com.example.labxspringboot.entity.TestAnalyse;
->>>>>>> main
 import com.example.labxspringboot.entity.TypeAnalyse;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,14 +24,11 @@ public class NormeDto implements Serializable {
     double min;
     double max;
     String unite;
-<<<<<<< HEAD
     private TypeAnalyse typeAnalyse;
 
     private Reactif reactif;
 
-=======
     @ToString.Exclude
     List<TestAnalyse> testAnalyses;
->>>>>>> main
     boolean deleted;
 }
