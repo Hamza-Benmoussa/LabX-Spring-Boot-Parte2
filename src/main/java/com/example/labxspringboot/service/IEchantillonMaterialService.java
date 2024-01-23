@@ -2,7 +2,8 @@ package com.example.labxspringboot.service;
 
 import com.example.labxspringboot.dto.EchantillonDto;
 import com.example.labxspringboot.entity.Echantillon;
+import com.example.labxspringboot.entity.EchantillonMaterial;
 
 public interface IEchantillonMaterialService {
-    void addEchantillon(Echantillon echantillon);
+    EchantillonMaterial addEchantillon(EchantillonMaterial echantillonMaterial);
 }

@@ -30,11 +30,6 @@ public class MaterielEchan {
 
     private String fournisseurNom;
 
-    @OneToMany(mappedBy = "materielEchan" , cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
-    @JsonIgnore  // Add this annotation to break the loop
-    @Fetch(FetchMode.SUBSELECT)
-    private List<Echantillon> echantillon;
-
     @OneToMany(mappedBy = "materielEchan" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonIgnore
     @Fetch(FetchMode.SUBSELECT)

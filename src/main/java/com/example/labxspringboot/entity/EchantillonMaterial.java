@@ -18,6 +18,5 @@ public class EchantillonMaterial {
     Echantillon echantillon;
     @ManyToOne
     MaterielEchan materielEchan;
-
     private int quantity;
 }

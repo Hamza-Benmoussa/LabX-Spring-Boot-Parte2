@@ -1,11 +1,16 @@
 package com.example.labxspringboot.entity;
 
 import com.example.labxspringboot.entity.enume.StatusResultat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,8 +36,11 @@ public class TestAnalyse {
     private TypeAnalyse typeAnalyse;
 
 
-    @ManyToOne
-    private Reactif reactif;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "testAnalyse" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JsonIgnore
+    @Fetch(FetchMode.SUBSELECT)
+    private List<TestReactif> testReactifs;
     @ManyToOne
     private Norme norme;
 

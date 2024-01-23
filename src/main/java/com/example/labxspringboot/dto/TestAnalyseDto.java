@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * DTO for {@link TestAnalyse}
@@ -22,7 +23,7 @@ public class TestAnalyseDto implements Serializable {
     StatusResultat statusResultat;
     float resultatNmbr;
     TypeAnalyse typeAnalyse;
-    Reactif reactif;
+    List<TestReactif> testReactifs;
     Norme norme;
     boolean deleted;
 

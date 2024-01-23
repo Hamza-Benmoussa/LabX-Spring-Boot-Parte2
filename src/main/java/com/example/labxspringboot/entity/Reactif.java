@@ -37,6 +37,6 @@ public class Reactif {
     @OneToMany(mappedBy = "reactif" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JsonIgnore  // Add this annotation to break the loop
     @Fetch(FetchMode.SUBSELECT)
-    private List<TestAnalyse> testAnalyses;
+    private List<TestReactif> testReactifs;
 
 }

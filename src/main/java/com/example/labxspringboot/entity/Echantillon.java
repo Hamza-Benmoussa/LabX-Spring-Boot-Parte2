@@ -27,8 +27,6 @@ public class Echantillon {
     @ManyToOne
     private Patient patient;
 
-    @ManyToOne
-    private MaterielEchan materielEchan;
     @ToString.Exclude
     @OneToMany(mappedBy = "echantillon" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
