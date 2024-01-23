@@ -41,6 +41,6 @@ Le projet LabXpert est configuré pour construire une application robuste en uti
 
 -Class :
 
-![class](https://github.com/HAMZA0707/LabX-Spring-Boot/assets/89112359/683ab26a-27df-445d-a219-68b8fbed6c1e)
+![classLabxp2](https://github.com/HAMZA0707/LabX-Spring-Boot-Parte2/assets/89112359/724c03b7-af6c-4f90-bd19-6815c4f60f73)
 
 
