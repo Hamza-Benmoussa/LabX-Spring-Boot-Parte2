@@ -28,7 +28,7 @@ class PatientServiceImplTest {
     @BeforeEach
     void setUp(){
         patientDto = new PatientDto();
-        patientDto.setId(1L);
+        patientDto.setId(46L);
         patientDto.setNom("mamamamama");
         patientDto.setPrenom("m3ayti");
         patientDto.setSexe("homme");

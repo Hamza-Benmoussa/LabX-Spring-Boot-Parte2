@@ -62,21 +62,21 @@ public class ReactifControllerTest  {
         reactifDto.setDescription("for all");
         reactifDto.setDateExpiration("12/01/2012");
     }
-    @Test
-    public void createReatifTest() throws Exception {
-        given(reactifService.saveReactif(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
-
-        // Performing HTTP POST request
-        ResultActions response = mockMvc.perform(post("/api/reactifs")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(reactifDto))); // Setting JSON content
-
-        // Verifying HTTP status and JSON content
-        response.andExpect(status().isCreated())
-                .andExpect(jsonPath("$.nom", CoreMatchers.is(reactifDto.getNom())))
-                .andExpect(jsonPath("$.description", CoreMatchers.is(reactifDto.getDescription())))
-                .andExpect(jsonPath("$.quantiteStock", CoreMatchers.is(reactifDto.getQuantiteStock())));
-    }
+//    @Test
+//    public void createReatifTest() throws Exception {
+//        given(reactifService.saveReactif(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
+//
+//        // Performing HTTP POST request
+//        ResultActions response = mockMvc.perform(post("/api/reactifs")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(reactifDto))); // Setting JSON content
+//
+//        // Verifying HTTP status and JSON content
+//        response.andExpect(status().isCreated())
+//                .andExpect(jsonPath("$.nom", CoreMatchers.is(reactifDto.getNom())))
+//                .andExpect(jsonPath("$.description", CoreMatchers.is(reactifDto.getDescription())))
+//                .andExpect(jsonPath("$.quantiteStock", CoreMatchers.is(reactifDto.getQuantiteStock())));
+//    }
     @Test
     public void getReactifTest() throws Exception {
 

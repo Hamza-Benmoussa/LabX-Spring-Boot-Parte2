@@ -7,7 +7,6 @@ import com.example.labxspringboot.dto.TypeAnalyseDto;
 import com.example.labxspringboot.dto.UtilisateurDto;
 import com.example.labxspringboot.entity.*;
 import com.example.labxspringboot.entity.enume.RoleUser;
-import com.example.labxspringboot.entity.enume.TypeAnalyseName;
 import com.example.labxspringboot.service.impl.NormeServiceImpl;
 import com.example.labxspringboot.service.impl.UtilisateurServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,7 +74,7 @@ private TypeAnalyseDto typeAnalyseDto;
 ////////////////////////
         typeAnalyseDto =new TypeAnalyseDto();
         typeAnalyseDto.setId(1L);
-        typeAnalyseDto.setTypeAnalyseName(TypeAnalyseName.HEMATOLOGIE);
+       // typeAnalyseDto.setTypeAnalyseName(TypeAnalyseName.HEMATOLOGIE);
     ///////////////
         normeDto = new NormeDto(); // Initialize utilisateurDto
         normeDto.setId(1L);
@@ -85,7 +84,7 @@ private TypeAnalyseDto typeAnalyseDto;
         normeDto.setReactif(modelMapper.map(reactifDto, Reactif.class));
     }
     @Test
-    void getanalyse() throws Exception {
+    void getNorme() throws Exception {
 
         // Mock the service to return the Analyse object
         when(normeService.getNormeById(1L)).thenReturn(normeDto);
