@@ -36,6 +36,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -82,7 +83,8 @@ public class PatientControllerTest {
                 .andExpect(jsonPath("$.dateNaissance", CoreMatchers.is(patientDto.getDateNaissance())))
                 .andExpect(jsonPath("$.sexe", CoreMatchers.is(patientDto.getSexe())))
                 .andExpect(jsonPath("$.adresse", CoreMatchers.is(patientDto.getAdresse())))
-                .andExpect(jsonPath("$.numeroTelephone", CoreMatchers.is(patientDto.getNumeroTelephone())));
+                .andExpect(jsonPath("$.numeroTelephone", CoreMatchers.is(patientDto.getNumeroTelephone()))).andDo(print());
+
     }
     @Test
     public void getPatientTest() throws Exception {

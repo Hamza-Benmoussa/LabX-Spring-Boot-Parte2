@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -23,7 +24,8 @@ public class UtilisateurDto implements Serializable {
     Long id;
 
     @NotNull
-    String nomUtilisateur;
+    @Email
+    String Email;
     //@JsonIgnore
     @NotBlank
     String motDePasse;

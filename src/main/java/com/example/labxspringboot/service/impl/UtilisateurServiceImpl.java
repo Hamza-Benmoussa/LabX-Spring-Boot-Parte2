@@ -5,6 +5,7 @@ import com.example.labxspringboot.dto.UtilisateurDto;
 import com.example.labxspringboot.entity.Norme;
 import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.RoleUser;
+import com.example.labxspringboot.exception.exept.EmailDejaExisteException;
 import com.example.labxspringboot.exception.exept.UtilisateurFoundException;
 import com.example.labxspringboot.repository.IUtilisateurRepository;
 import com.example.labxspringboot.service.IUtilisateurService;
@@ -25,6 +26,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 
     @Override
     public UtilisateurDto saveUtilisateur(UtilisateurDto utilisateurDto) {
+        checkExistEmail(utilisateurDto);
         Utilisateur utilisateur=modelMapper.map(utilisateurDto,Utilisateur.class);
         Utilisateur savedUtilisateur=utilisateurRepository.save(utilisateur);
         return maskPasswordInDto(modelMapper.map(savedUtilisateur,UtilisateurDto.class));
@@ -50,10 +52,27 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         }
         return utilisateurDto;
     }
+
+    private UtilisateurDto checkExistEmail (UtilisateurDto utilisateurDto){
+        if (utilisateurDto.getEmail().equals(getByEmail(utilisateurDto.getEmail()))){
+            throw new EmailDejaExisteException("deja exist cette email");
+        }
+        return utilisateurDto;
+    }
+    public String getByEmail(String email)
+    {
+        Utilisateur utilisateur = utilisateurRepository.findByEmailAndDeletedFalse(email);
+        if(utilisateur != null)
+        {
+            return utilisateur.getEmail();
+        }
+        return null;
+    }
     @Override
     public UtilisateurDto updateUtilisateur(UtilisateurDto utilisateurDto,Long id) {
         Utilisateur existingUser = utilisateurRepository.findByIdAndDeletedFalse(id).orElse(null);
-        existingUser.setNomUtilisateur(utilisateurDto.getNomUtilisateur());
+        checkExistEmail(utilisateurDto);
+        existingUser.setEmail(utilisateurDto.getEmail());
         existingUser.setRole(utilisateurDto.getRole());
         existingUser.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
         existingUser.setDeleted(false);

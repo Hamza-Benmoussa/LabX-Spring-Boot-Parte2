@@ -45,7 +45,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <!-- Add these dependencies to your pom.xml file -->
         <dependency>
             <groupId>org.modelmapper</groupId>

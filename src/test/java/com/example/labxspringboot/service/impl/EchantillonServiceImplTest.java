@@ -71,7 +71,7 @@ class EchantillonServiceImplTest {
 
         // Create a sample Utilisateur
         utilisateurDTO = new UtilisateurDto();
-        utilisateurDTO.setNomUtilisateur("moko");
+        utilisateurDTO.setEmail("hamza@gmail.com");
         utilisateurDTO.setMotDePasse("123");
         utilisateurDTO.setRole(RoleUser.TECHNICIEN);
         utilisateurDTO = iUtilisateurService.saveUtilisateur(utilisateurDTO);

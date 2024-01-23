@@ -20,7 +20,7 @@ public class Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nomUtilisateur;
+    private String email;
 
     private String motDePasse;
 
@@ -31,8 +31,8 @@ public class Utilisateur {
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 
-    public Utilisateur(String nomUtilisateur, String motDePasse, RoleUser role) {
-        this.nomUtilisateur = nomUtilisateur;
+    public Utilisateur(String email, String motDePasse, RoleUser role) {
+        this.email = email;
         this.motDePasse = motDePasse;
         this.role = role;
     }

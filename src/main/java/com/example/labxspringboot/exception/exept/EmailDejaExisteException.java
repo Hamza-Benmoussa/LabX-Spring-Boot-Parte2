@@ -1,7 +1,7 @@
-//package com.example.labxspringboot.exception.exept;
-//
-//public class EmailDejaExisteException extends RuntimeException {
-//    public EmailDejaExisteExceptionException(String message){
-//        super(message);
-//    }
-//}
+package com.example.labxspringboot.exception.exept;
+
+public class EmailDejaExisteException extends RuntimeException {
+    public EmailDejaExisteException(String message){
+        super(message);
+    }
+}

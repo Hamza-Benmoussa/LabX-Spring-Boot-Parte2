@@ -56,7 +56,7 @@ public class UtilisateurControllerTest {
     @BeforeEach
     public void init() {
         utilisateurDto = new UtilisateurDto(); // Initialize utilisateurDto
-        utilisateurDto.setNomUtilisateur("Raichu");
+        utilisateurDto.setEmail("koka@gmail.com");
         utilisateurDto.setMotDePasse("123");
         utilisateurDto.setRole(RoleUser.TECHNICIEN);
     }
@@ -71,7 +71,7 @@ public class UtilisateurControllerTest {
 
         // Verifying HTTP status and JSON content
         response.andExpect(status().isCreated())
-                .andExpect(jsonPath("$.nomUtilisateur", CoreMatchers.is(utilisateurDto.getNomUtilisateur())))
+                .andExpect(jsonPath("$.email", CoreMatchers.is(utilisateurDto.getEmail())))
                 .andExpect(jsonPath("$.motDePasse", CoreMatchers.is(utilisateurDto.getMotDePasse())))
                 .andExpect(jsonPath("$.role", CoreMatchers.is(utilisateurDto.getRole().toString())));
     }
@@ -85,7 +85,7 @@ public class UtilisateurControllerTest {
                 .content(objectMapper.writeValueAsString(utilisateurDto)));
 
         response.andExpect(status().isOk())
-                .andExpect(jsonPath("$.nomUtilisateur", CoreMatchers.is(utilisateurDto.getNomUtilisateur())))
+                .andExpect(jsonPath("$.email", CoreMatchers.is(utilisateurDto.getEmail())))
                // .andExpect(MockMvcResultMatchers.jsonPath("$.motDePasse", CoreMatchers.is(utilisateurDto.getMotDePasse())))
                 .andExpect(jsonPath("$.role", CoreMatchers.is(utilisateurDto.getRole().toString())));
     }
@@ -93,12 +93,12 @@ public class UtilisateurControllerTest {
     public void GetAllUsers() throws Exception{
         UtilisateurDto user1 = new UtilisateurDto();
         user1.setId(1L);
-        user1.setNomUtilisateur("Dazai");
+        user1.setEmail("ham@gmail.com");
         user1.setMotDePasse("123456");
         user1.setRole(RoleUser.TECHNICIEN);
         UtilisateurDto user2 = new UtilisateurDto();
         user2.setId(2L);
-        user2.setNomUtilisateur("Ossamu");
+        user2.setEmail("mom@gmail.com");
         user2.setMotDePasse("123456");
         user2.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
         List<UtilisateurDto> userDTOList = Arrays.asList(user1, user2);
@@ -109,11 +109,11 @@ public class UtilisateurControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].nomUtilisateur").value("Dazai"))
+                .andExpect(jsonPath("$[0].email").value("ham@gmail.com"))
                 .andExpect(jsonPath("$[0].role").value("TECHNICIEN"))
 
                 .andExpect(jsonPath("$[1].id").value(2))
-                .andExpect(jsonPath("$[1].nomUtilisateur").value("Ossamu"))
+                .andExpect(jsonPath("$[1].email").value("mom@gmail.com"))
                 .andExpect(jsonPath("$[1].role").value("RESPONSABLE_LABORATOIRE"))
 
                 .andReturn();
@@ -134,7 +134,7 @@ public class UtilisateurControllerTest {
                 .content(objectMapper.writeValueAsString(utilisateurDto)));
 
         response.andExpect(status().isOk())
-                .andExpect(jsonPath("$.nomUtilisateur", CoreMatchers.is(utilisateurDto.getNomUtilisateur())))
+                .andExpect(jsonPath("$.email", CoreMatchers.is(utilisateurDto.getEmail())))
                 .andExpect(jsonPath("$.role", CoreMatchers.is(utilisateurDto.getRole().toString())));
     }
     @Test

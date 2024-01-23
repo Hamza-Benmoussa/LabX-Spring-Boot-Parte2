@@ -38,6 +38,11 @@ public class Echantillon {
     @ManyToOne
     private Utilisateur utilisateurTechnicien;
 
+    @OneToMany(mappedBy = "echantillon" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @JsonIgnore
+    @Fetch(FetchMode.SUBSELECT)
+    private List<EchantillonMaterial> echantillonMaterials;
+
     private String datePrelevement;
 
     @Column(name="is_deleted" ,nullable = false)

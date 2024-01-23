@@ -68,7 +68,7 @@ class AnalyseServiceImplTest {
 
         // Create a sample Utilisateur
         utilisateurDTO = new UtilisateurDto();
-        utilisateurDTO.setNomUtilisateur("moko");
+        utilisateurDTO.setEmail("hamza@gmail.com");
         utilisateurDTO.setMotDePasse("123");
         utilisateurDTO.setRole(RoleUser.TECHNICIEN);
         utilisateurDTO = iUtilisateurService.saveUtilisateur(utilisateurDTO);
@@ -76,7 +76,7 @@ class AnalyseServiceImplTest {
         //Create utilisateur respo
 
         utilisateurDTO1 = new UtilisateurDto();
-        utilisateurDTO1.setNomUtilisateur("manidi");
+        utilisateurDTO1.setEmail("manini@gmail.com");
         utilisateurDTO1.setMotDePasse("123");
         utilisateurDTO1.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
         utilisateurDTO1 = iUtilisateurService.saveUtilisateur(utilisateurDTO1);

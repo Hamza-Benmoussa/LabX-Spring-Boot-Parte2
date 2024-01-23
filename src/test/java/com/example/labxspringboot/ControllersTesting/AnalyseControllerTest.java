@@ -79,7 +79,7 @@ public class AnalyseControllerTest {
         /***************************************************************/
         utilisateurDto=new UtilisateurDto();
         utilisateurDto.setId(1L);
-        utilisateurDto.setNomUtilisateur("piki");
+        utilisateurDto.setEmail("piki@gmail.com");
         utilisateurDto.setMotDePasse("123");
         utilisateurDto.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
         //when(i_utilisateur.addUser(utilisateurDTO)).thenReturn(utilisateurDTO);

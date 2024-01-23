@@ -35,6 +35,11 @@ public class MaterielEchan {
     @Fetch(FetchMode.SUBSELECT)
     private List<Echantillon> echantillon;
 
+    @OneToMany(mappedBy = "materielEchan" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JsonIgnore
+    @Fetch(FetchMode.SUBSELECT)
+    private List<EchantillonMaterial> echantillonMaterials;
+
     public MaterielEchan(String nomechan, int quantiteStockEhcna, String dateExpirationEchan, String fournisseurNom) {
         this.nomechan = nomechan;
         this.quantiteStockEhcna = quantiteStockEhcna;
