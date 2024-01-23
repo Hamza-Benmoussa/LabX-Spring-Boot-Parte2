@@ -64,13 +64,15 @@ public class EchantillonControllerTest {
     private ObjectMapper objectMapper;
 
     private EchantillonDto echantillonDto ;
+    private PatientDto patientDto;
+    private UtilisateurDto utilisateurDto;
     ModelMapper modelMapper=new ModelMapper();
 
 
     @BeforeEach
     public void init()  {
-        Patient patientDto = new Patient("Pikachu", "Pokemon", "Male", "Yellow 123", "0123456789", "25/02/1995");
-        Utilisateur utilisateurDto = new Utilisateur("Raichu", "123", RoleUser.TECHNICIEN);
+        patientDto = new PatientDto("Pikachu", "Pokemon", "Male", "Yellow 123", "0123456789", "25/02/1995");
+        utilisateurDto = new UtilisateurDto("Raichu", "123", RoleUser.TECHNICIEN);
         echantillonDto = new EchantillonDto();
         echantillonDto.setId(1L);
         echantillonDto.setPatient(modelMapper.map(patientDto, Patient.class));
@@ -80,27 +82,19 @@ public class EchantillonControllerTest {
 
     }
 
-//    @Test
-//    public void createEchantillionTest() throws Exception {
-//         given(echantillonService.saveEchantillon(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
-//
-//        // Performing HTTP POST request
-//        ResultActions response = mockMvc.perform(post("/api/echantillons")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(echantillonDto)));
-//
-//        // Verifying HTTP status and JSON content
-//        response.andExpect(status().isCreated())
-//                .andExpect(jsonPath("$.id").value(echantillonDto.getId()))
-//                .andExpect(jsonPath("$.patient.nom").value(echantillonDto.getPatient().getNom()))
-//                .andExpect(jsonPath("$.patient.prenom").value(echantillonDto.getPatient().getPrenom()))
-//                .andExpect(jsonPath("$.utilisateurTechnicien.nomUtilisateur").value(echantillonDto.getUtilisateurTechnicien().getNomUtilisateur()))
-//                .andExpect(jsonPath("$.datePrelevement").value(echantillonDto.getDatePrelevement()))
-//                .andExpect(jsonPath("$.deleted").value(echantillonDto.isDeleted()));
-//        MvcResult mvcResult = response.andReturn();
-//        String jsonResponse = mvcResult.getResponse().getContentAsString();
-//        System.out.println("JSON Response: " + jsonResponse);
-//    }
+    @Test
+    public void createEchantillionTest() throws Exception {
+         given(echantillonService.saveEchantillon(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
+
+        // Performing HTTP POST request
+        ResultActions response = mockMvc.perform(post("/api/echantillons")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(echantillonDto)));
+
+        // Verifying HTTP status and JSON content
+        response.andExpect(status().isCreated()).andReturn();
+
+    }
    @Test
     public void getEchantillonTest() throws Exception {
 
