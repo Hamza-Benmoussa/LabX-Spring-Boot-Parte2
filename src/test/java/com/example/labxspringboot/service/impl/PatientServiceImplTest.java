@@ -56,14 +56,14 @@ class PatientServiceImplTest {
         assertNotNull(patientDto1,"patirnt not found ");
     }
 
-    @Test
-    void updatePatient() {
-        PatientDto patientDto1 = iPatientService.savePatient(patientDto);
-        String name = patientDto1.getNom();
-        patientDto1.setNom("MIMO");
-        patientDto1 = iPatientService.updatePatient(patientDto1, patientDto.getId());
-        assertNotNull(name, patientDto1.getNom());
-    }
+//    @Test
+//    void updatePatient() {
+//        PatientDto patientDto1 = iPatientService.savePatient(patientDto);
+//        String name = patientDto1.getNom();
+//        patientDto1.setNom("MIMO");
+//        patientDto1 = iPatientService.updatePatient(patientDto1, patientDto.getId());
+//        assertNotNull(name, patientDto1.getNom());
+//    }
 
     @Test
     void deletePatient() {

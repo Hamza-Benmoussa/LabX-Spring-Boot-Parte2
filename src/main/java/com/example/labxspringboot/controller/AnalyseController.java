@@ -23,7 +23,7 @@ public class AnalyseController {
 
     @Autowired
     private AnalyseServiceImpl analyseService;
-    @Autowired
+  //  @Autowired
     private IRapportResultatService iRapportResultatService;
 
 
