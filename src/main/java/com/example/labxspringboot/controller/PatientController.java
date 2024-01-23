@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/patients")
+@RequestMapping(value = "/api/patients",produces = "application/json")
 public class PatientController {
 
     @Autowired

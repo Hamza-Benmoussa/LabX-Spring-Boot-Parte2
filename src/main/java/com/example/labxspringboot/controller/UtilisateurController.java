@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/utilisateurs")
+@RequestMapping(value = "/api/utilisateurs" , produces = "application/json")
 public class UtilisateurController {
     @Autowired
     private UtilisateurServiceImpl utilisateurService;

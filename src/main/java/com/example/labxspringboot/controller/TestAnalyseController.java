@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/testanalyse")
+@RequestMapping(value = "/api/testanalyse" , produces = "application/json")
 public class TestAnalyseController {
 
     @Autowired

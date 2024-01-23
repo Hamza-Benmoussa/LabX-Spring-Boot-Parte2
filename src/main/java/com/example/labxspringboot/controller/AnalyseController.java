@@ -18,7 +18,7 @@ import java.text.ParseException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/analyses")
+@RequestMapping(value = "/api/analyses" , produces = "application/json")
 public class AnalyseController {
 
     @Autowired
