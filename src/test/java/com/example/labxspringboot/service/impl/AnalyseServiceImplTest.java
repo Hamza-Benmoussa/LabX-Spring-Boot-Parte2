@@ -68,7 +68,7 @@ class AnalyseServiceImplTest {
 
         // Create a sample Utilisateur
         utilisateurDTO = new UtilisateurDto();
-        utilisateurDTO.setEmail("hamza@gmail.com");
+        utilisateurDTO.setEmail("h@gmail.com");
         utilisateurDTO.setMotDePasse("123");
         utilisateurDTO.setRole(RoleUser.TECHNICIEN);
         utilisateurDTO = iUtilisateurService.saveUtilisateur(utilisateurDTO);
