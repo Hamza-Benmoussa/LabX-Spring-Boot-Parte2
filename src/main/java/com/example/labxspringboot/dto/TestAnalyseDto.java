@@ -19,7 +19,7 @@ import java.util.List;
 public class TestAnalyseDto implements Serializable {
     Long id;
     String description;
-    Utilisateur utilisateurRespo;
+    Utilisateur utilisateurTechnicien;
     StatusResultat statusResultat;
     float resultatNmbr;
     TypeAnalyse typeAnalyse;

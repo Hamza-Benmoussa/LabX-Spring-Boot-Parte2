@@ -16,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +48,8 @@ class AnalyseServiceImplTest {
     private UtilisateurDto utilisateurDTO1;
     private EchantillonDto echantillonDTO;
     private AnalyseDto analyseDto;
+    Date date;
+    SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
 
     @BeforeEach
     void setUp() throws ParseException {
@@ -68,6 +72,7 @@ class AnalyseServiceImplTest {
 
         // Create a sample Utilisateur
         utilisateurDTO = new UtilisateurDto();
+        utilisateurDTO.setNom("mimi");
         utilisateurDTO.setEmail("h@gmail.com");
         utilisateurDTO.setMotDePasse("123");
         utilisateurDTO.setRole(RoleUser.TECHNICIEN);
@@ -76,6 +81,7 @@ class AnalyseServiceImplTest {
         //Create utilisateur respo
 
         utilisateurDTO1 = new UtilisateurDto();
+        utilisateurDTO1.setNom("kokl");
         utilisateurDTO1.setEmail("manini@gmail.com");
         utilisateurDTO1.setMotDePasse("123");
         utilisateurDTO1.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
@@ -84,9 +90,9 @@ class AnalyseServiceImplTest {
         // Create EchantillonDTO
         echantillonDTO = new EchantillonDto();
         echantillonDTO.setPatient(modelMapper.map(patientDTO, Patient.class));
-        echantillonDTO.setUtilisateurTechnicien(modelMapper.map(utilisateurDTO, Utilisateur.class));
-        echantillonDTO.setMaterielEchan(modelMapper.map(materielEchanDto, MaterielEchan.class));
+        echantillonDTO.setUtilisateurPreleveur(modelMapper.map(utilisateurDTO, Utilisateur.class));
         echantillonDTO.setDatePrelevement("2525");
+        echantillonDTO.setNomAnalyse("momo");
         echantillonDTO = iEchantillonService.saveEchantillon(echantillonDTO);
 
         //Create Analyse
@@ -95,9 +101,10 @@ class AnalyseServiceImplTest {
         analyseDto.setCommentaires("ahah");
         analyseDto.setEchantillon(modelMapper.map(echantillonDTO , Echantillon.class));
         analyseDto.setStatusAnalyse(StatusAnalyse.EN_COURS_ANALYSE);
-        analyseDto.setDateFinAnalyse("2020");
-        analyseDto.setDateFinAnalyse("2022");
-        analyseDto.setUtilisateurRespo(modelMapper.map(utilisateurDTO1,Utilisateur.class));
+        analyseDto.setNom(echantillonDTO.getNomAnalyse());
+        analyseDto.setDateFinAnalyse(inputFormat.parse("2022-10-11"));
+        analyseDto.setDateFinAnalyse(inputFormat.parse("2022-10-15"));
+        analyseDto.setUtilisateurTechnicien(modelMapper.map(utilisateurDTO1,Utilisateur.class));
         analyseDto =iAnalyseService.saveAnalyse(analyseDto);
 
     }

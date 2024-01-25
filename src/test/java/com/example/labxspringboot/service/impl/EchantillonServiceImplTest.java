@@ -71,6 +71,7 @@ class EchantillonServiceImplTest {
 
         // Create a sample Utilisateur
         utilisateurDTO = new UtilisateurDto();
+        utilisateurDTO.setNom("kama");
         utilisateurDTO.setEmail("hamza@gmail.com");
         utilisateurDTO.setMotDePasse("123");
         utilisateurDTO.setRole(RoleUser.TECHNICIEN);
@@ -79,9 +80,9 @@ class EchantillonServiceImplTest {
         // Create a sample EchantillonDTO
         echantillonDTO = new EchantillonDto();
         echantillonDTO.setPatient(modelMapper.map(patientDTO, Patient.class));
-        echantillonDTO.setUtilisateurTechnicien(modelMapper.map(utilisateurDTO, Utilisateur.class));
-        echantillonDTO.setMaterielEchan(modelMapper.map(materielEchanDto, MaterielEchan.class));
+        echantillonDTO.setUtilisateurPreleveur(modelMapper.map(utilisateurDTO, Utilisateur.class));
         echantillonDTO.setDatePrelevement("2525");
+        echantillonDTO.setNomAnalyse("biochimie");
         echantillonDTO = iEchantillonService.saveEchantillon(echantillonDTO);
     }
 

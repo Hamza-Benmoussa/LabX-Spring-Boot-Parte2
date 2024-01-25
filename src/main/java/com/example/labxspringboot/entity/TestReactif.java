@@ -19,4 +19,6 @@ public class TestReactif {
     @ManyToOne
     Reactif reactif;
     private int quantity;
+    @Column(name="is_deleted" ,nullable = false)
+    private boolean deleted;
 }

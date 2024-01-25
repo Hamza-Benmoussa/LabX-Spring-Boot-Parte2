@@ -57,6 +57,7 @@ public class UtilisateurControllerTest {
     @BeforeEach
     public void init() {
         utilisateurDto = new UtilisateurDto(); // Initialize utilisateurDto
+        utilisateurDto.setNom("mimo");
         utilisateurDto.setEmail("koka@gmail.com");
         utilisateurDto.setMotDePasse("123");
         utilisateurDto.setRole(RoleUser.TECHNICIEN);
@@ -68,7 +69,8 @@ public class UtilisateurControllerTest {
         // Performing HTTP POST request
         ResultActions response = mockMvc.perform(post("/api/utilisateurs")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(utilisateurDto))); // Setting JSON content
+                .content(objectMapper.writeValueAsString(utilisateurDto)));
+        // Setting JSON content
 
         // Verifying HTTP status and JSON content
         response.andExpect(status().isCreated())
@@ -90,11 +92,13 @@ public class UtilisateurControllerTest {
     public void GetAllUsers() throws Exception{
         UtilisateurDto user1 = new UtilisateurDto();
         user1.setId(1L);
+        user1.setNom("koka");
         user1.setEmail("ham@gmail.com");
         user1.setMotDePasse("123456");
         user1.setRole(RoleUser.TECHNICIEN);
         UtilisateurDto user2 = new UtilisateurDto();
         user2.setId(2L);
+        user2.setNom("momo");
         user2.setEmail("mom@gmail.com");
         user2.setMotDePasse("123456");
         user2.setRole(RoleUser.RESPONSABLE_LABORATOIRE);

@@ -2,6 +2,7 @@ package com.example.labxspringboot.service.impl;
 
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.dto.EchantillonDto;
+import com.example.labxspringboot.entity.Analyse;
 import com.example.labxspringboot.entity.Echantillon;
 import com.example.labxspringboot.repository.IEchantillonRepository;
 import com.example.labxspringboot.service.IAnalyseService;
@@ -10,12 +11,14 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class EchantillonServiceImpl implements IEchantillonService {
 
     @Autowired
@@ -28,19 +31,27 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public EchantillonDto saveEchantillon(EchantillonDto echantillonDto) {
+        // Map the DTO to an Echantillon entity
+
         Echantillon echantillon = modelMapper.map(echantillonDto, Echantillon.class);
 
-        // Sauvegarder l'échantillon sans associer d'analyse pour le moment
+        // Save the Echantillon entity
         Echantillon savedEchantillon = echantillonRepository.save(echantillon);
+        // Create an Analyse entity and associate it with the saved Echantillon
+//        AnalyseDto analyseDto = new AnalyseDto();
+//        analyseDto.setNom(echantillonDto.getNomAnalyse());
+        AnalyseDto savedAnalyse = iAnalyseService.createAnalyseForEchantillon(savedEchantillon);
+        System.out.println(savedEchantillon);
+        // Update the Echantillon with the saved Analyse
+//        savedEchantillon.getAnalyses().add(savedAnalyse);
 
-        // Créer une nouvelle analyse associée à l'échantillon
-        AnalyseDto analyseDto = new AnalyseDto();
+        // Save the updated Echantillon
+        Echantillon updatedEchantillon = echantillonRepository.save(savedEchantillon);
 
-        // Ajoutez d'autres détails de l'analyse si nécessaire
-        AnalyseDto savedAnalyseDto = iAnalyseService.createAnalyseForEchantillon(savedEchantillon, analyseDto);
-
-        return modelMapper.map(savedEchantillon, EchantillonDto.class);
+        // Map the updated Echantillon back to DTO and return
+        return modelMapper.map(updatedEchantillon, EchantillonDto.class);
     }
+
 
     @Override
     public List<EchantillonDto> getEchantillons() {

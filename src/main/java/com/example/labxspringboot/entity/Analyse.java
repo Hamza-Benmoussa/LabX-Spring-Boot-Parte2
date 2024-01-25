@@ -10,6 +10,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,11 +30,11 @@ public class Analyse {
     private String nom;
 
     @ManyToOne
-    private Utilisateur utilisateurRespo;
+    private Utilisateur utilisateurTechnicien;
 
-    private String dateDebutAnalyse;
+    private Date dateDebutAnalyse;
 
-    private String dateFinAnalyse;
+    private Date dateFinAnalyse;
 
     @Enumerated(EnumType.STRING)
     private StatusAnalyse statusAnalyse;

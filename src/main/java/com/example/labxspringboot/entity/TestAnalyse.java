@@ -25,7 +25,7 @@ public class TestAnalyse {
     private String description;
 
     @ManyToOne
-    private Utilisateur utilisateurRespo;
+    private Utilisateur utilisateurTechnicien;
 
     @Enumerated(EnumType.STRING)
     private StatusResultat statusResultat;

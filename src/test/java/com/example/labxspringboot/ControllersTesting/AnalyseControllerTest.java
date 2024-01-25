@@ -24,7 +24,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -64,6 +66,9 @@ public class AnalyseControllerTest {
     TypeAnalyseDto typeAnalyseDto;
 
     ModelMapper modelMapper=new ModelMapper();
+
+    Date date;
+    SimpleDateFormat inputFormat=new SimpleDateFormat("yyyy-MM-dd");
     @BeforeEach
     void setUp() throws ParseException {
         patientDto=new PatientDto();
@@ -88,7 +93,7 @@ public class AnalyseControllerTest {
         echantillonDto=new EchantillonDto();
         echantillonDto.setId(1L);
         echantillonDto.setPatient(modelMapper.map(patientDto, Patient.class));
-        echantillonDto.setUtilisateurTechnicien(modelMapper.map(utilisateurDto, Utilisateur.class));
+        echantillonDto.setUtilisateurPreleveur(modelMapper.map(utilisateurDto, Utilisateur.class));
 
         //when(i_echantillon.addEchantillon(echantillonDTO)).thenReturn(echantillonDTO);
         //EchantillonDTO echantillonDTO1=i_echantillon.addEchantillon(echantillonDTO);
@@ -138,9 +143,6 @@ public class AnalyseControllerTest {
     void updateAnalyse() throws Exception {
         when(analyseService.getAnalyseById(1L)).thenReturn(analyseDto);
         analyseDto.setCommentaires("analyse a faire urgent");
-        analyseDto.setDateDebutAnalyse("2024-01-19");
-        analyseDto.setDateFinAnalyse("2024-01-19");
-
         when(analyseService.updateAnalyse(analyseDto,1L)).thenReturn(analyseDto);
         MvcResult mvcResult = mockMvc.perform(put("/api/analyses/1") // Include the ID in the path
                         .contentType(MediaType.APPLICATION_JSON)

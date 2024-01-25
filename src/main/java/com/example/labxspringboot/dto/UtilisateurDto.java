@@ -26,6 +26,8 @@ public class UtilisateurDto implements Serializable {
     @NotNull
     @Email
     String Email;
+    @NotNull
+    String nom;
     //@JsonIgnore
     @NotBlank
     String motDePasse;

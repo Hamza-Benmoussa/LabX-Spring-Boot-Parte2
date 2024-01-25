@@ -39,4 +39,6 @@ public class Reactif {
     @Fetch(FetchMode.SUBSELECT)
     private List<TestReactif> testReactifs;
 
+
+
 }

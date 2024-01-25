@@ -1,16 +1,15 @@
 package com.example.labxspringboot.controller;
 
 import com.example.labxspringboot.dto.AnalyseDto;
-import com.example.labxspringboot.service.IAnalyseService;
+import com.example.labxspringboot.dto.PlanificationDto;
 import com.example.labxspringboot.service.IRapportResultatService;
 import com.example.labxspringboot.service.impl.AnalyseServiceImpl;
-import com.example.labxspringboot.service.impl.TypeAnalyseServiceImpl;
-import lombok.AllArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
@@ -19,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/analyses" , produces = "application/json")
+@Transactional
 public class AnalyseController {
 
     @Autowired
@@ -57,6 +57,12 @@ public class AnalyseController {
     public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable("id") Long id, @RequestBody AnalyseDto analyseDto) {
     return ResponseEntity.ok(analyseService.updateAnalyse(analyseDto,id));
  }
+
+    @PostMapping("/planification")
+    public ResponseEntity<PlanificationDto> affecterAnalyse(@RequestBody PlanificationDto planificationDto){
+        planificationDto = analyseService.planifierAnalyse(planificationDto);
+        return new ResponseEntity<>(planificationDto,HttpStatus.CREATED);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAnalyseById(@PathVariable("id") Long id) {

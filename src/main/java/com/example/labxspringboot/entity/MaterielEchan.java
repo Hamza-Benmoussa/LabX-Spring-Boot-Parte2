@@ -34,14 +34,6 @@ public class MaterielEchan {
     @JsonIgnore
     @Fetch(FetchMode.SUBSELECT)
     private List<EchantillonMaterial> echantillonMaterials;
-
-    public MaterielEchan(String nomechan, int quantiteStockEhcna, String dateExpirationEchan, String fournisseurNom) {
-        this.nomechan = nomechan;
-        this.quantiteStockEhcna = quantiteStockEhcna;
-        this.dateExpirationEchan = dateExpirationEchan;
-        this.fournisseurNom = fournisseurNom;
-    }
-
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
 

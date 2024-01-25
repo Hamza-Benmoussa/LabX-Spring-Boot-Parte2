@@ -3,23 +3,30 @@ package com.example.labxspringboot.service.impl;
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.entity.Analyse;
 import com.example.labxspringboot.entity.Echantillon;
+import com.example.labxspringboot.entity.Planification;
+import com.example.labxspringboot.dto.PlanificationDto;
 import com.example.labxspringboot.repository.IAnalyseRepository;
+import com.example.labxspringboot.repository.IPlanificationRepository;
 import com.example.labxspringboot.service.IAnalyseService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class AnalyseServiceImpl implements IAnalyseService {
 
     @Autowired
     private IAnalyseRepository iAnalyseRepository;
 
+    @Autowired
+    private IPlanificationRepository iPlanificationRepository;
 
     private final ModelMapper modelMapper;
 
@@ -44,13 +51,15 @@ public class AnalyseServiceImpl implements IAnalyseService {
     @Override
     public AnalyseDto updateAnalyse(AnalyseDto analyseDto, Long id) {
         Analyse existingAnalyse = iAnalyseRepository.findById(id).orElse(null);
-        if (existingAnalyse != null) {
-            modelMapper.map(analyseDto, existingAnalyse);
-            existingAnalyse.setId(id);
-            Analyse savedAnalyse = iAnalyseRepository.save(existingAnalyse);
-            return modelMapper.map(savedAnalyse, AnalyseDto.class);
-        }
-        return null;
+        System.out.println(id);
+        existingAnalyse.setStatusAnalyse(analyseDto.getStatusAnalyse());
+        existingAnalyse.setDateDebutAnalyse(analyseDto.getDateDebutAnalyse());
+        existingAnalyse.setDateFinAnalyse(analyseDto.getDateFinAnalyse());
+        existingAnalyse.setCommentaires(analyseDto.getCommentaires());
+        existingAnalyse.setUtilisateurTechnicien(analyseDto.getUtilisateurTechnicien());
+        Analyse updateAnalyse = iAnalyseRepository.save(existingAnalyse);
+        updateAnalyse.setId(id);
+        return modelMapper.map(updateAnalyse, AnalyseDto.class);
     }
 
     @Override
@@ -63,14 +72,21 @@ public class AnalyseServiceImpl implements IAnalyseService {
     }
 
     @Override
+    public PlanificationDto planifierAnalyse(PlanificationDto planificationDTO) {
+        Planification planification = iPlanificationRepository.save(modelMapper.map(planificationDTO , Planification.class));
+        return modelMapper.map(planification, PlanificationDto.class);
+    }
+
+    @Override
     public List<Object[]> printResultAnalyse(Long id) {
         return iAnalyseRepository.getAnalysisReport(id);
     }
 
     @Override
-    public AnalyseDto createAnalyseForEchantillon(Echantillon echantillon, AnalyseDto analyseDto) {
-        Analyse analyse = modelMapper.map(analyseDto, Analyse.class);
+    public AnalyseDto createAnalyseForEchantillon(Echantillon echantillon) {
+        Analyse analyse= new Analyse();
         analyse.setEchantillon(echantillon);
+        analyse.setNom(echantillon.getNomAnalyse());
         Analyse savedAnalyse = iAnalyseRepository.save(analyse);
         return modelMapper.map(savedAnalyse, AnalyseDto.class);
     }

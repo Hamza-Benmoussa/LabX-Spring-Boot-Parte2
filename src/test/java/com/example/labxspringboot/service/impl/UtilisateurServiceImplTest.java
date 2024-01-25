@@ -34,6 +34,7 @@ class UtilisateurServiceImplTest {
     void setUp() {
         // Create a sample UtilisateurDto
         utilisateurDto = new UtilisateurDto();
+        utilisateurDto.setNom("lhytman");
         utilisateurDto.setEmail("hamza@gmail.com");
         utilisateurDto.setMotDePasse("testPassword");
         utilisateurDto.setRole(RoleUser.TECHNICIEN);

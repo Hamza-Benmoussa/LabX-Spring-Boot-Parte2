@@ -5,16 +5,11 @@ import com.example.labxspringboot.controller.UtilisateurController;
 import com.example.labxspringboot.dto.EchantillonDto;
 import com.example.labxspringboot.dto.PatientDto;
 import com.example.labxspringboot.dto.UtilisateurDto;
-import com.example.labxspringboot.entity.Echantillon;
-import com.example.labxspringboot.entity.MaterielEchan;
-import com.example.labxspringboot.entity.Patient;
-import com.example.labxspringboot.entity.Utilisateur;
+import com.example.labxspringboot.entity.*;
 import com.example.labxspringboot.entity.enume.RoleUser;
 import com.example.labxspringboot.repository.IAnalyseRepository;
 import com.example.labxspringboot.repository.IEchantillonRepository;
-import com.example.labxspringboot.service.impl.EchantillonServiceImpl;
-import com.example.labxspringboot.service.impl.PatientServiceImpl;
-import com.example.labxspringboot.service.impl.UtilisateurServiceImpl;
+import com.example.labxspringboot.service.impl.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
@@ -24,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -55,7 +51,15 @@ public class EchantillonContollerTest {
     private MockMvc mockMvc;
 
     @MockBean
+    private MaterialEchanServiceImpl materialEchanService;
+    @MockBean
+    private EchantillonMaterialServiceImpl echantillonMaterialService;
+    @MockBean
+    private UtilisateurServiceImpl utilisateurService;
+    @MockBean
     private EchantillonServiceImpl echantillonService;
+    @MockBean
+    private ModelMapper modelMapper;
     @MockBean
     private PatientServiceImpl patientService;
 
@@ -69,12 +73,11 @@ public class EchantillonContollerTest {
     @BeforeEach
     public void init()  {
         Patient patientDto = new Patient("Pikachu", "Pokemon", "Male", "Yellow 123", "0123456789", "25/02/1995");
-        Utilisateur utilisateurDto = new Utilisateur("Raichu", "123", RoleUser.TECHNICIEN);
+        Utilisateur utilisateurDto = new Utilisateur("hamza","Raichu@gmail.com", "123", RoleUser.TECHNICIEN);
         echantillonDto = new EchantillonDto();
         echantillonDto.setId(1L);
         echantillonDto.setPatient(patientDto);
-        echantillonDto.setUtilisateurTechnicien(utilisateurDto);
-        echantillonDto.setMaterielEchan(new MaterielEchan("123", 12, "12/12/2021", "hello"));
+        echantillonDto.setUtilisateurPreleveur(utilisateurDto);
         echantillonDto.setDatePrelevement("01/01/2023");
 
     }

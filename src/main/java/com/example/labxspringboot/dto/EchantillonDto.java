@@ -16,7 +16,8 @@ import java.util.List;
 public class EchantillonDto implements Serializable {
     Long id;
     Patient patient;
-    Utilisateur utilisateurTechnicien;
+    Utilisateur utilisateurPreleveur;
+    String nomAnalyse;
     String datePrelevement;
     List<Analyse> analyses;
     List<EchantillonMaterial> echantillonMaterials;

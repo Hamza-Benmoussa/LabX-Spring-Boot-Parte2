@@ -23,6 +23,7 @@ public class Echantillon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nomAnalyse;
 
     @ManyToOne
     private Patient patient;
@@ -34,7 +35,7 @@ public class Echantillon {
     private List<Analyse> analyses;
 
     @ManyToOne
-    private Utilisateur utilisateurTechnicien;
+    private Utilisateur utilisateurPreleveur;
 
     @OneToMany(mappedBy = "echantillon" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JsonIgnore

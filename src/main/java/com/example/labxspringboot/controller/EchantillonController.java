@@ -3,13 +3,12 @@ package com.example.labxspringboot.controller;
 import com.example.labxspringboot.dto.AnalyseDto;
 import com.example.labxspringboot.dto.EchantillonDto;
 import com.example.labxspringboot.dto.MaterielEchanDto;
-import com.example.labxspringboot.entity.Analyse;
-import com.example.labxspringboot.entity.Echantillon;
-import com.example.labxspringboot.entity.EchantillonMaterial;
-import com.example.labxspringboot.entity.MaterielEchan;
+import com.example.labxspringboot.entity.*;
+import com.example.labxspringboot.exception.exept.UtilisateurFoundException;
 import com.example.labxspringboot.service.IEchantillonMaterialService;
 import com.example.labxspringboot.service.IMaterialEchanService;
-import com.example.labxspringboot.service.impl.EchantillonServiceImpl;
+import com.example.labxspringboot.service.IUtilisateurService;
+import com.example.labxspringboot.service.impl.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,25 +27,31 @@ public class EchantillonController {
     @Autowired
     private EchantillonServiceImpl echantillonService;
     @Autowired
-    private IMaterialEchanService iMaterialEchanService;
+    private MaterialEchanServiceImpl materialEchanService;
     @Autowired
-    private IEchantillonMaterialService iEchantillonMaterialService;
+    private EchantillonMaterialServiceImpl iEchantillonMaterialService;
+    @Autowired
+    private UtilisateurServiceImpl utilisateurService;
+    @Autowired
+    private AnalyseServiceImpl analyseService;
 
     @Autowired
     private ModelMapper modelMapper;
     @PostMapping
-    public ResponseEntity<EchantillonDto> saveEchantillon(@RequestBody EchantillonDto echantillonDto) {
+    public ResponseEntity<EchantillonDto> saveEchantillon(@RequestBody EchantillonDto echantillonDto) throws UtilisateurFoundException {
+        Utilisateur utilisateur=modelMapper.map(utilisateurService.getUtilisateurById(echantillonDto.getUtilisateurPreleveur().getId()),Utilisateur.class);
+        echantillonDto.setUtilisateurPreleveur(utilisateur);
         EchantillonDto saveEchantillonDto = echantillonService.saveEchantillon(echantillonDto);
         EchantillonDto echantillonDto1 = saveEchantillonDto;
         if (echantillonDto.getEchantillonMaterials() != null) {
             for (EchantillonMaterial echantillonMaterial : echantillonDto.getEchantillonMaterials()) {
-                MaterielEchan materielEchan = modelMapper.map(iMaterialEchanService.getMaterialEchanById(echantillonMaterial.getMaterielEchan().getId()), MaterielEchan.class);
+                MaterielEchan materielEchan = modelMapper.map(materialEchanService.getMaterialEchanById(echantillonMaterial.getMaterielEchan().getId()), MaterielEchan.class);
                 echantillonMaterial.setEchantillon(modelMapper.map(echantillonDto1, Echantillon.class));
                 echantillonMaterial.setMaterielEchan(materielEchan);
                 iEchantillonMaterialService.addEchantillon(echantillonMaterial);
 
                 materielEchan.setQuantiteStockEhcna(materielEchan.getQuantiteStockEhcna() - echantillonMaterial.getQuantity());
-                iMaterialEchanService.updateMaterialEchan(modelMapper.map(materielEchan, MaterielEchanDto.class), materielEchan.getId());
+                materialEchanService.updateMaterialEchan(modelMapper.map(materielEchan, MaterielEchanDto.class), materielEchan.getId());
             }
         }
         return new ResponseEntity<>(saveEchantillonDto , HttpStatus.CREATED);

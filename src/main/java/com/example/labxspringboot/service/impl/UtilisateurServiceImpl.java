@@ -73,6 +73,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         Utilisateur existingUser = utilisateurRepository.findByIdAndDeletedFalse(id).orElse(null);
         checkExistEmail(utilisateurDto);
         existingUser.setEmail(utilisateurDto.getEmail());
+        existingUser.setNom((utilisateurDto.getNom()));
         existingUser.setRole(utilisateurDto.getRole());
         existingUser.setRole(RoleUser.RESPONSABLE_LABORATOIRE);
         existingUser.setDeleted(false);
