@@ -9,6 +9,7 @@ import com.example.labxspringboot.service.IEchantillonMaterialService;
 import com.example.labxspringboot.service.IMaterialEchanService;
 import com.example.labxspringboot.service.IUtilisateurService;
 import com.example.labxspringboot.service.impl.*;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/echantillons" ,produces = "application/json")
 @Transactional
+@CrossOrigin(origins = "http://localhost:4200")
+@Slf4j
 public class EchantillonController {
 
     @Autowired
@@ -37,21 +40,26 @@ public class EchantillonController {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Transactional
     @PostMapping
     public ResponseEntity<EchantillonDto> saveEchantillon(@RequestBody EchantillonDto echantillonDto) throws UtilisateurFoundException {
+        log.info("EchantillonDto {}",echantillonDto);
         Utilisateur utilisateur=modelMapper.map(utilisateurService.getUtilisateurById(echantillonDto.getUtilisateurPreleveur().getId()),Utilisateur.class);
+        log.info("UtilisateurDto {}",utilisateur);
         echantillonDto.setUtilisateurPreleveur(utilisateur);
         EchantillonDto saveEchantillonDto = echantillonService.saveEchantillon(echantillonDto);
         EchantillonDto echantillonDto1 = saveEchantillonDto;
         if (echantillonDto.getEchantillonMaterials() != null) {
             for (EchantillonMaterial echantillonMaterial : echantillonDto.getEchantillonMaterials()) {
                 MaterielEchan materielEchan = modelMapper.map(materialEchanService.getMaterialEchanById(echantillonMaterial.getMaterielEchan().getId()), MaterielEchan.class);
+                log.info("MaterialEchan {}",materielEchan);
                 echantillonMaterial.setEchantillon(modelMapper.map(echantillonDto1, Echantillon.class));
                 echantillonMaterial.setMaterielEchan(materielEchan);
                 iEchantillonMaterialService.addEchantillon(echantillonMaterial);
 
                 materielEchan.setQuantiteStockEhcna(materielEchan.getQuantiteStockEhcna() - echantillonMaterial.getQuantity());
                 materialEchanService.updateMaterialEchan(modelMapper.map(materielEchan, MaterielEchanDto.class), materielEchan.getId());
+                log.info("MaterialEchan22 {}",materielEchan);
             }
         }
         return new ResponseEntity<>(saveEchantillonDto , HttpStatus.CREATED);

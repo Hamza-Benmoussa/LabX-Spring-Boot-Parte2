@@ -22,11 +22,10 @@ public class AnalyseDto implements Serializable {
     Echantillon echantillon;
     String nom;
     Utilisateur utilisateurTechnicien;
-    Date dateDebutAnalyse;
-    Date dateFinAnalyse;
+    String dateDebutAnalyse;
+    String dateFinAnalyse;
     StatusAnalyse statusAnalyse;
     String commentaires;
-//    @ToString.Exclude
     List<TypeAnalyse> typeAnalyses;
     boolean deleted;
 

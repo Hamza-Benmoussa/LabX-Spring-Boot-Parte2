@@ -9,6 +9,7 @@ import java.util.List;
 public interface IUtilisateurService {
 
     UtilisateurDto saveUtilisateur(UtilisateurDto utilisateurDto);
+    Utilisateur loadUserByEmail(String email);
 
     List<UtilisateurDto> getUtilisateurs();
     UtilisateurDto getUtilisateurById(Long id) throws UtilisateurFoundException;

@@ -1,6 +1,7 @@
 package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.Analyse;
+import com.example.labxspringboot.entity.Echantillon;
 import com.example.labxspringboot.entity.Planification;
 import com.example.labxspringboot.entity.Utilisateur;
 import com.example.labxspringboot.entity.enume.RoleUser;

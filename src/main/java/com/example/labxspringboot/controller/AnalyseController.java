@@ -53,7 +53,7 @@ public class AnalyseController {
     return ResponseEntity.ok(analyseDto);
  }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable("id") Long id, @RequestBody AnalyseDto analyseDto) {
     return ResponseEntity.ok(analyseService.updateAnalyse(analyseDto,id));
  }

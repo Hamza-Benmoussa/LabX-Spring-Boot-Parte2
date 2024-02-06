@@ -11,6 +11,7 @@ import com.example.labxspringboot.repository.IUtilisateurRepository;
 import com.example.labxspringboot.service.IUtilisateurService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,12 +25,26 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public UtilisateurServiceImpl(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     @Override
     public UtilisateurDto saveUtilisateur(UtilisateurDto utilisateurDto) {
+        String encodedPassword = passwordEncoder.encode(utilisateurDto.getMotDePasse());
+        utilisateurDto.setMotDePasse(encodedPassword);
         checkExistEmail(utilisateurDto);
         Utilisateur utilisateur=modelMapper.map(utilisateurDto,Utilisateur.class);
         Utilisateur savedUtilisateur=utilisateurRepository.save(utilisateur);
         return maskPasswordInDto(modelMapper.map(savedUtilisateur,UtilisateurDto.class));
+    }
+
+    @Override
+    public Utilisateur loadUserByEmail(String email) {
+        return utilisateurRepository.findByEmailAndDeletedFalse(email);
     }
 
     @Override

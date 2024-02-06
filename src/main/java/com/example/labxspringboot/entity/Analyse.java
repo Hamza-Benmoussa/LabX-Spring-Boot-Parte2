@@ -32,9 +32,9 @@ public class Analyse {
     @ManyToOne
     private Utilisateur utilisateurTechnicien;
 
-    private Date dateDebutAnalyse;
+    private String dateDebutAnalyse;
 
-    private Date dateFinAnalyse;
+    private String dateFinAnalyse;
 
     @Enumerated(EnumType.STRING)
     private StatusAnalyse statusAnalyse;

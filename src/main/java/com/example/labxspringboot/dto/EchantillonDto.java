@@ -1,6 +1,7 @@
 package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
@@ -13,6 +14,8 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class EchantillonDto implements Serializable {
     Long id;
     Patient patient;

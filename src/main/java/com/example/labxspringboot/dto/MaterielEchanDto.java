@@ -1,10 +1,7 @@
 package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.EchantillonMaterial;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +11,8 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class MaterielEchanDto implements Serializable {
     Long id;
     String nomechan;

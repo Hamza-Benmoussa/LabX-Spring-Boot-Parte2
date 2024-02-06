@@ -1,6 +1,8 @@
 package com.example.labxspringboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,5 +38,14 @@ public class MaterielEchan {
     private List<EchantillonMaterial> echantillonMaterials;
     @Column(name="is_deleted" ,nullable = false)
     private boolean deleted;
+
+    @JsonCreator
+    public MaterielEchan(@JsonProperty("nomEchan") String nomEchan, @JsonProperty("quantiteStockEhcna") int quantiteStockEhcna, @JsonProperty("dateExpirationEchan") String dateExpirationEchan, @JsonProperty("fournisseurNom") String fournisseurNom) {
+        // Initialiser les propriétés de la classe avec les valeurs passées en arguments
+        this.nomechan = nomEchan;
+        this.quantiteStockEhcna = quantiteStockEhcna;
+        this.dateExpirationEchan = dateExpirationEchan;
+        this.fournisseurNom = fournisseurNom;
+    }
 
 }
