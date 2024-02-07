@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,7 @@ public class EchantillonController {
     private ModelMapper modelMapper;
     @Transactional
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('PRELEVEUR','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<EchantillonDto> saveEchantillon(@RequestBody EchantillonDto echantillonDto) throws UtilisateurFoundException {
         log.info("EchantillonDto {}",echantillonDto);
         Utilisateur utilisateur=modelMapper.map(utilisateurService.getUtilisateurById(echantillonDto.getUtilisateurPreleveur().getId()),Utilisateur.class);
@@ -66,22 +68,26 @@ public class EchantillonController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('PRELEVEUR','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<List<EchantillonDto>> getAllEchantillons() {
         return ResponseEntity.ok(echantillonService.getEchantillons());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('PRELEVEUR','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<EchantillonDto> getEchantillonById(@PathVariable("id") Long echantillonId) {
         EchantillonDto echantillonDto = echantillonService.getEchantillonById(echantillonId);
         return ResponseEntity.ok(echantillonDto);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('PRELEVEUR','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<EchantillonDto> updateEchantillon(@PathVariable("id") Long id, @RequestBody EchantillonDto echantillonDto) {
        return ResponseEntity.ok(echantillonService.updateEchantillon(echantillonDto ,id));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('PRELEVEUR','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<String> deleteEchantillonById(@PathVariable("id") Long id) {
         echantillonService.deleteEchantillon(id);
         return ResponseEntity.ok("Echantillon with id : " + id + "was deleted");

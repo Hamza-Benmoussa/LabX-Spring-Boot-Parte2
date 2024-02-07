@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class AnalyseController {
 
 
     @GetMapping("/pdf/{id}")
+    @PreAuthorize("hasAnyAuthority('TECHNICIEN','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<Resource> getpdf(@PathVariable(value = "id") Long id_Analyse) throws JRException, FileNotFoundException, ParseException {
         byte[] reportContent=iRapportResultatService.exportRepport(id_Analyse);
         ByteArrayResource resource = new ByteArrayResource(reportContent);
@@ -43,28 +45,33 @@ public class AnalyseController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('TECHNICIEN','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<List<AnalyseDto>> getAllAnalyses() {
         return ResponseEntity.ok(analyseService.getAnalyses());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('TECHNICIEN','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<AnalyseDto> getAnalyseById(@PathVariable("id") Long analyseId) {
     AnalyseDto analyseDto = analyseService.getAnalyseById(analyseId);
     return ResponseEntity.ok(analyseDto);
  }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAnyAuthority('TECHNICIEN','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable("id") Long id, @RequestBody AnalyseDto analyseDto) {
     return ResponseEntity.ok(analyseService.updateAnalyse(analyseDto,id));
  }
 
     @PostMapping("/planification")
+    @PreAuthorize("hasAnyAuthority('PRELEVEUR','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<PlanificationDto> affecterAnalyse(@RequestBody PlanificationDto planificationDto){
         planificationDto = analyseService.planifierAnalyse(planificationDto);
         return new ResponseEntity<>(planificationDto,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('TECHNICIEN','RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<String> deleteAnalyseById(@PathVariable("id") Long id) {
     analyseService.deleteAnalyse(id);
     return ResponseEntity.ok("Analyse with : "+id+"has benn deleted succes");

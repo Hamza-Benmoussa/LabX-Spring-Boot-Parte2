@@ -42,7 +42,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             String email = decodedJWT.getSubject();
             String [] roles = decodedJWT.getClaim("roles").asArray(String.class);
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-
             for (String role : roles){
                 authorities.add(new SimpleGrantedAuthority(role));
 
