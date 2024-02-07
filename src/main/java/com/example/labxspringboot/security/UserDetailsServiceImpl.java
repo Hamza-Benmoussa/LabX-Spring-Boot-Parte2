@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Utilisateur utilisateur = utilisateurService.loadUserByEmail(email);
         if (utilisateur == null) throw new UsernameNotFoundException("NOT FOUND USER");
         GrantedAuthority authority = new SimpleGrantedAuthority(utilisateur.getRole().name());
-        return new User(utilisateur.getNom(),utilisateur.getMotDePasse(), Collections.singleton(authority));
+        return new User(utilisateur.getEmail(),utilisateur.getMotDePasse(), Collections.singleton(authority));
 
     }
 }

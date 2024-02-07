@@ -24,8 +24,8 @@ public class JWTHelper {
                 .sign(algorithm);
     }
 
-    public String generateRefreshToken(String userName){
-        return  JWT.create().withSubject(userName)
+    public String generateRefreshToken(String email){
+        return  JWT.create().withSubject(email)
                 .withExpiresAt(new Date(System.currentTimeMillis()+EXPIRE_REFRESH_TOKEN))
                 .withIssuer(ISSUER)
                 .sign(algorithm);
