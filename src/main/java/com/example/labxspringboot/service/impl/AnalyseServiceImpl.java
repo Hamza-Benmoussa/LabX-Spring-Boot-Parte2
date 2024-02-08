@@ -56,7 +56,6 @@ public class AnalyseServiceImpl implements IAnalyseService {
         existingAnalyse.setDateDebutAnalyse(analyseDto.getDateDebutAnalyse());
         existingAnalyse.setDateFinAnalyse(analyseDto.getDateFinAnalyse());
         existingAnalyse.setCommentaires(analyseDto.getCommentaires());
-        existingAnalyse.setUtilisateurTechnicien(analyseDto.getUtilisateurTechnicien());
         Analyse updateAnalyse = iAnalyseRepository.save(existingAnalyse);
         updateAnalyse.setId(id);
         return modelMapper.map(updateAnalyse, AnalyseDto.class);

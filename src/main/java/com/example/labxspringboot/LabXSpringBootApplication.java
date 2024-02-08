@@ -1,11 +1,24 @@
 package com.example.labxspringboot;
 
+import com.example.labxspringboot.config.CustomCorsFilter;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
+
 @SpringBootApplication
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @EnableSwagger2
 @EnableWebMvc
 public class LabXSpringBootApplication {
@@ -14,6 +27,19 @@ public class LabXSpringBootApplication {
         SpringApplication.run(LabXSpringBootApplication.class, args);
     }
 
+    @Bean
+    public FilterRegistrationBean<CustomCorsFilter> corsFilter() {
+        FilterRegistrationBean<CustomCorsFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new CustomCorsFilter());
+        registrationBean.setOrder(0); // Set the order based on your needs
+        return registrationBean;
+    }
+
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 //    @Bean
 //    CommandLineRunner start(NormeServiceImpl normeService, UtilisateurServiceImpl utilisateurService, EchantillonServiceImpl echantillonService, PatientServiceImpl patientService, MaterialEchanServiceImpl materialEchanService, ReactifServiceImpl reactifService, AnalyseServiceImpl analyseService, TestAnalyseServiceImpl testAnalyseService) {
 //        return args -> {

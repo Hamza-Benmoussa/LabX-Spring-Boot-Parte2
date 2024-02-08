@@ -4,10 +4,7 @@ import com.example.labxspringboot.entity.Norme;
 import com.example.labxspringboot.entity.Reactif;
 import com.example.labxspringboot.entity.TestAnalyse;
 import com.example.labxspringboot.entity.TypeAnalyse;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +14,8 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class NormeDto implements Serializable {
     Long id;
     String description;

@@ -2,10 +2,7 @@ package com.example.labxspringboot.dto;
 
 import com.example.labxspringboot.entity.Echantillon;
 import jdk.nashorn.internal.ir.annotations.Ignore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +12,8 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class PatientDto implements Serializable {
     Long id;
     String nom;

@@ -1,5 +1,6 @@
 package com.example.labxspringboot.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
@@ -11,6 +12,8 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+
 public class ReactifDto implements Serializable {
     Long id;
     String nom;

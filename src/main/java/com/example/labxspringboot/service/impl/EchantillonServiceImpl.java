@@ -8,6 +8,7 @@ import com.example.labxspringboot.repository.IEchantillonRepository;
 import com.example.labxspringboot.service.IAnalyseService;
 import com.example.labxspringboot.service.IEchantillonService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 @Transactional
+@Slf4j
 public class EchantillonServiceImpl implements IEchantillonService {
 
     @Autowired
@@ -32,9 +34,9 @@ public class EchantillonServiceImpl implements IEchantillonService {
     @Override
     public EchantillonDto saveEchantillon(EchantillonDto echantillonDto) {
         // Map the DTO to an Echantillon entity
-
+        log.info("echantillonDto {}",echantillonDto);
         Echantillon echantillon = modelMapper.map(echantillonDto, Echantillon.class);
-
+        log.info("echantillonDto {}",echantillonDto);
         // Save the Echantillon entity
         Echantillon savedEchantillon = echantillonRepository.save(echantillon);
         // Create an Analyse entity and associate it with the saved Echantillon
