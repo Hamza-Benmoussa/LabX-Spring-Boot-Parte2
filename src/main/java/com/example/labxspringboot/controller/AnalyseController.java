@@ -29,7 +29,7 @@ public class AnalyseController {
 
 
     @GetMapping("/pdf/{id}")
-    @PreAuthorize("hasAnyAuthority('TECHNICIEN','RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RRESPONSABLE_LABORATOIRE')")
     public ResponseEntity<Resource> getpdf(@PathVariable(value = "id") Long id_Analyse) throws JRException, FileNotFoundException, ParseException {
         byte[] reportContent=iRapportResultatService.exportRepport(id_Analyse);
         ByteArrayResource resource = new ByteArrayResource(reportContent);

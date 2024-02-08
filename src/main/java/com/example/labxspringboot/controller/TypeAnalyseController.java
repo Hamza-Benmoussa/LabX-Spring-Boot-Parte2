@@ -26,14 +26,14 @@ public class TypeAnalyseController {
     private ModelMapper modelMapper;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<TypeAnalyseDto> saveTypeAnalyse(@RequestBody TypeAnalyseDto typeAnalyseDto) {
         TypeAnalyseDto savedTypeAnalyse = typeAnalyseService.saveTypeAnalyse(typeAnalyseDto);
         return new ResponseEntity<>(savedTypeAnalyse, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public List<TypeAnalyseDto> getAllTypeAnalyses() {
         return typeAnalyseService.getTypeAnalyses().stream()
                 .map(typeAnalyse -> modelMapper.map(typeAnalyse, TypeAnalyseDto.class))
@@ -41,14 +41,14 @@ public class TypeAnalyseController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<TypeAnalyseDto> getTypeAnalyseById(@PathVariable("id") Long typeAnalyseId) {
         TypeAnalyseDto typeAnalyseDto = typeAnalyseService.getTypeAnalyseById(typeAnalyseId);
         return ResponseEntity.ok(typeAnalyseDto);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<TypeAnalyseDto> updateTypeAnalyse(@PathVariable("id") Long id,
                                                             @RequestBody TypeAnalyseDto typeAnalyseDto) {
         return ResponseEntity.ok(typeAnalyseService.updateTypeAnalyse(typeAnalyseDto, id));
@@ -56,7 +56,7 @@ public class TypeAnalyseController {
 
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<String> deleteTypeAnalyse(@PathVariable("id") Long id) {
         typeAnalyseService.deleteTypeAnalyse(id);
         return ResponseEntity.ok("TypeAnalyse with id " +id+ "was deleted succes");

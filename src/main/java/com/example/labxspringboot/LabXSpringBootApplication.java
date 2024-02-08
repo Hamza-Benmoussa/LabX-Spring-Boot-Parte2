@@ -17,7 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @EnableSwagger2
 @EnableWebMvc
 public class LabXSpringBootApplication {

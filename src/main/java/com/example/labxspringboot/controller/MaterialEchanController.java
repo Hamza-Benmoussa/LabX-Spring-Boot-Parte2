@@ -22,33 +22,33 @@ public class MaterialEchanController {
     private MaterialEchanServiceImpl materialEchanService;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<MaterielEchanDto> saveMaterial(@RequestBody MaterielEchanDto materielEchanDto) {
         MaterielEchanDto materielEchanDto1 = materialEchanService.saveMaterialEchan(materielEchanDto);
         return new ResponseEntity<>(materielEchanDto1,HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<List<MaterielEchanDto>> getAllMaterial() {
         return ResponseEntity.ok(materialEchanService.getMaterialEchans());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<MaterielEchanDto> getMaterialById(@PathVariable("id") Long materialId) {
         MaterielEchanDto materielEchanDto = materialEchanService.getMaterialEchanById(materialId);
         return ResponseEntity.ok(materielEchanDto);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<MaterielEchanDto> updateMaterial(@PathVariable("id") Long id, @RequestBody MaterielEchanDto materielEchanDto) {
         return ResponseEntity.ok(materialEchanService.updateMaterialEchan(materielEchanDto,id));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<String> deleteMaterial(@PathVariable("id") Long id) {
         materialEchanService.deleteMaterialEchan(id);
         return ResponseEntity.ok("Material with id : " + id + "was deleted");

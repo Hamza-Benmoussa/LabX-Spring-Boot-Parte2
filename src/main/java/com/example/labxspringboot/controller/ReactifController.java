@@ -20,33 +20,33 @@ public class ReactifController {
     private ReactifServiceImpl reactifService;
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<ReactifDto> saveReactif(@RequestBody ReactifDto reactifDto) {
         ReactifDto savedReactifDto = reactifService.saveReactif(reactifDto);
         return new ResponseEntity<>(savedReactifDto, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<List<ReactifDto>> getAllReactifs() {
         return ResponseEntity.ok(reactifService.getReactifs());
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<ReactifDto> getReactifById(@PathVariable("id") Long reactifId) {
         ReactifDto reactifDto = reactifService.getReactifById(reactifId);
         return ResponseEntity.ok(reactifDto);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<ReactifDto> updateReactif(@PathVariable("id") Long id, @RequestBody ReactifDto reactifDto) {
         return ResponseEntity.ok(reactifService.updateReactif(reactifDto,id));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('RESPONSABLE_LABORATOIRE')")
+    @PreAuthorize("hasAuthority('RESPONSABLE_LABORATOIRE')")
     public ResponseEntity<String> deleteNorme(@PathVariable("id") Long id) {
         reactifService.deleteReactif(id);
         return ResponseEntity.ok("Reactif with id : " + id + "was deleted");
