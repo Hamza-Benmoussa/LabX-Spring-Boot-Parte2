@@ -37,10 +37,10 @@ Le projet LabXpert est configuré pour construire une application robuste en uti
 
 -Use cas:
 
-![img.png](img.png)
+![image](https://github.com/HAMZA0707/LabX-Spring-Boot-Parte2/assets/89112359/0dd5d3b9-27be-4658-bf7e-0d6fc72ca8f1)
 
 -Class :
 
-![classLabxp2](https://github.com/HAMZA0707/LabX-Spring-Boot-Parte2/assets/89112359/724c03b7-af6c-4f90-bd19-6815c4f60f73)
+![image](https://github.com/HAMZA0707/LabX-Spring-Boot-Parte2/assets/89112359/1cd69794-267a-42b1-8ae5-00cb0c95e8cb)
 
 
